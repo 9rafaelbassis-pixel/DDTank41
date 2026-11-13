@@ -1,0 +1,38 @@
+name: DDTank Flash language PT-BR
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/flash-language-ptbr.yml'
+permissions:
+  contents: read
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      HF_HOME: /tmp/ddtank-flash-language-models
+      TOKENIZERS_PARALLELISM: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install translation packages on CPU
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install 'transformers>=4.49,<5' sentencepiece sacremoses
+      - name: Validate Python and translate UI text
+        run: |
+          python -m py_compile tools/migration/Translate-Flash-Language-PTBR.py
+          python tools/migration/Translate-Flash-Language-PTBR.py
+      - name: Upload PT-BR Flash language and review table
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ddtank-flash-language-ptbr
+          path: translation-output/flash-ui/
+          retention-days: 7
+          if-no-files-found: warn
