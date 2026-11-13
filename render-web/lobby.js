@@ -89,7 +89,7 @@ function attachLobbyServer(server,pool) {
   server.on("upgrade",async(req,socket,head)=>{
     try {
       const url = new URL(req.url,"http://localhost");
-      if(url.pathname!=="/ws/lobby")return reject(socket,"404 Not Found");
+      if(url.pathname!=="/ws/lobby")return; // Other WebSocket handlers check their own paths
       const origin=req.headers.origin;
       const canonical=new URL(process.env.PUBLIC_ORIGIN||"https://ddtank-web.onrender.com").origin;
       if(origin!==canonical)return reject(socket,"403 Forbidden");
