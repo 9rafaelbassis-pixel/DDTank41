@@ -4,6 +4,7 @@ Reports only sanitized URL paths and short constant names; no credentials or pay
 This is diagnostic, not a replacement for a game server.
 """
 import json
+import lzma
 import re
 import struct
 import zlib
@@ -12,7 +13,8 @@ from urllib.parse import urlsplit
 ASSETS = [Path("Source Flash/FlashSV1")/n for n in ("Launcher.swf","Loading.swf","DDT_Loading.swf")]
 OUTPUT=Path("migration-output/flash-client-audit")
 TARGET=re.compile(r"(?:127\.0\.0\.1|/rest-auth/|login|password|register|loading|server|client|session)",re.I)
-SHORTSAFE=re.compile(r"^[\w./:%?#=&{}:@+ -]{2,80}$",re.U)
+SYMBOL=re.compile(r"^[A-Za-z_][A-Za-z0-9_.$/:]{1,70}$")
+KNOWN_TERMS={"URLRequest","URLVariables","URLLoader","load","data","POST","GET","HTTPStatusEvent","JSON","parse"}
 URL=re.compile(r"https?://[^\s\x00<>\"']{3,240}",re.I)
 
 def u30(raw,at):
@@ -47,6 +49,17 @@ def swf_tags(data):
  if sig==b"CWS":
   try:data=data[:8]+zlib.decompress(data[8:])
   except zlib.error:return sig,[],0
+ elif sig==b"ZWS":
+  if len(data)<17:return sig,[],0
+  # SWF ZWS stores raw LZMA1 stream after a 5-byte LZMA properties block.
+  # FORMAT_ALONE requires those properties plus the expected 8-byte size.
+  uncompressed=struct.unpack_from("<I",data,4)[0]-8
+  if uncompressed<0 or uncompressed>50000000:return sig,[],0
+  try:
+   body=lzma.decompress(data[12:17]+struct.pack("<Q",uncompressed)+data[17:],format=lzma.FORMAT_ALONE)
+   if len(body)!=uncompressed:return sig,[],0
+   data=data[:8]+body
+  except (lzma.LZMAError,EOFError,ValueError):return sig,[],0
  elif sig!=b"FWS":return sig,[],0
  if len(data)<12:return sig,[],0
  rect_bits=data[8]>>3
@@ -69,13 +82,18 @@ def swf_tags(data):
  return sig,strings,abc_count
 def sanitize(s):
  s=s.strip()
- if not SHORTSAFE.fullmatch(s):return None
- if re.search(r"(?:pass|secret|token|api_key)[=:]",s,re.I):return None
- if len(s)>=55 and re.fullmatch("[A-Za-z0-9_-]+",s):return None
+ # Only short identifiers and API terms; NEVER report arbitrary adjacent
+ # values, license strings, passwords, UUIDs or embedded session tokens.
+ if not SYMBOL.fullmatch(s):return None
+ if s not in KNOWN_TERMS and not TARGET.search(s):return None
+ if re.search(r"(?:secret|password|token|api_key)[=:]",s,re.I):return None
+ if re.fullmatch(r"[A-Fa-f0-9]{20,}",s):return None
  return s
 def analyze(f):
  data=f.read_bytes()
  sig,all_strings,abc_count=swf_tags(data)
+ if f.name=="Launcher.swf" and abc_count<1:
+  raise RuntimeError("SWF Launcher ainda não foi descompactado/analisado corretamente")
  endpoints={}
  for s in all_strings:
   for m in URL.finditer(s):

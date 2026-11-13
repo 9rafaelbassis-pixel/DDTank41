@@ -3,10 +3,12 @@ const assert=require("node:assert/strict");
 const {LEGACY_LOGIN_ENDPOINTS,RELAY_PATH,authUrlRewriteRules,rejectLegacyLogin}=require("../flash-compat");
 test("legacy URL rewrite includes only exact historic login endpoints",()=>{
  const rules=authUrlRewriteRules("https://ddtank-web.onrender.com");
- assert.equal(rules.length,2);
+ assert.equal(rules.length,6);
  assert.equal(rules[0][0],"https://127.0.0.1:8000/rest-auth/login/");
  for(let i=0;i<2;i++)assert.equal(rules[i][1],"https://ddtank-web.onrender.com"+RELAY_PATH);
  assert.equal(rules.some(([s])=>s.includes("evil.com")),false);
+ assert.ok(rules.some(([src,target])=>src.includes("/user/api/server-list/")&&target.endsWith("/game-client/compat/user/api/server-list/")));
+ assert.ok(rules.some(([src,target])=>src.includes("/user/api/login2/getlinkflash/")&&target.endsWith("/game-client/compat/user/api/login2/getlinkflash/")));
 });
 test("compat login responds unavailable without looking at password or database",()=>{
  const fakeReq={method:"POST",body:{password:"SECRET_CANNOT_BE_USED",username:"person"}};
