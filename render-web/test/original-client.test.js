@@ -1,6 +1,6 @@
 const test=require("node:test");
 const assert=require("node:assert/strict");
-const {allowedPath,gitBlobSha,safeConfig,contentType}=require("../original-client");
+const {allowedPath,gitBlobSha,safeConfig,contentType,clientHtml}=require("../original-client");
 
 test("manifest admits only real original files",()=>{
  assert.equal(allowedPath("Launcher.swf"),true);
@@ -37,4 +37,13 @@ test("serves correct content types",()=>{
  assert.match(contentType("Launcher.swf"),/flash/);
  assert.match(contentType("ui/vietnam/language.txt"),/text\/plain/);
  assert.match(contentType("config.xml"),/xml/);
+});
+
+test("Ruffle client HTML embeds syntactically valid JavaScript and no external scripts",()=>{
+ const html=clientHtml();
+ assert.match(html,/Abrir o cliente original/);
+ assert.match(html,/\/game-client\/ruffle\/ruffle\.js/);
+ const inline=html.split('<script>')[1].split('</script>')[0];
+ assert.doesNotThrow(()=>new Function(inline));
+ assert.doesNotMatch(html,/https:\/\/unpkg\.com|<script src="https?:/);
 });
