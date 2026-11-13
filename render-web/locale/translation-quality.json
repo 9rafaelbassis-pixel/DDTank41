@@ -1,0 +1,10 @@
+{
+  "originalLines": 3530,
+  "keys": 3504,
+  "manualOverrides": 10,
+  "untranslatedSegmentsReplaced": 0,
+  "sha256": "01641e1f08647a88a9b3a3e7eaf1ad2db3f370b8eb5e00846da37de8ec090b76",
+  "status": "PT-BR experimental por IA, revisão da comunidade necessária",
+  "source": "Source Flash/FlashSV1/ui/vietnam/language.txt",
+  "fallback": "O arquivo original continua em GitHub e pode ser servido com DDTANK_FLASH_PTBR=false."
+}
