@@ -19,7 +19,7 @@ app.use(helmet({ contentSecurityPolicy: false }));
 // A no-op compatibility endpoint with NO user state changes or credential handling.
 // It runs before body parsers/CSRF so the legacy SWF cannot submit credentials
 // to our account system or accidentally trigger form authentication.
-app.all(RELAY_PATH, rejectLegacyLogin);
+app.all(RELAY_PATH, rateLimit({windowMs:60*1000,limit:45,standardHeaders:"draft-7",legacyHeaders:false}), rejectLegacyLogin);
 app.use(express.urlencoded({ extended: false, limit: "120kb" }));
 app.use(express.json({ limit: "10kb" }));
 app.use(csrf);
