@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/publish-flash-localization.yml'
+      - 'tools/migration/Prepare-Flash-Locale-PTBR.py'
 permissions:
   contents: write
   actions: read
