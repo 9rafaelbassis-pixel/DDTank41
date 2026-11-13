@@ -33,3 +33,5 @@ jobs:
           node --check csrf.js
       - name: Test
         run: npm test
+      - name: Verificar transporte autenticado WebSocket-TCP
+        run: node integration/legacy-bridge.cjs
