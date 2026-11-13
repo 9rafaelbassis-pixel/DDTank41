@@ -64,3 +64,17 @@ O repositório histórico contém códigos antigos com **credenciais e chaves em
 - Render Web Services: https://render.com/docs/web-services
 - Render WebSockets: https://render.com/docs/websocket
 - Ruffle URL Rewrite: https://ruffle.rs/js-docs/master/interfaces/Config.URLLoadOptions.html
+
+## Protocolo real localizado no C#
+
+`Game.Base/Packets/StreamProcessor.cs` e `Game.Base/Packets/GSPacketIn.cs` definem o enquadramento original dos pacotes, incluindo:
+
+- Marcador big-endian `29099` (`0x71AB`);
+- Comprimento e cabeçalho de 20 bytes;
+- Código do pacote, identificador do cliente e dois parâmetros `Int32`;
+- Checksum calculado pelo código original;
+- Criptografia/chave de sessão variável após autenticação (`m_client.Encryted`).
+
+Foi criado `render-web/legacy-packets.js` para **decodificar apenas o cabeçalho de pacotes não cifrados**, com testes de tamanhos e campos. Não registra payloads, não captura senhas e **não altera os bytes** da ponte WSS↔TCP. Pacotes criptografados ou o handshake completo exigem execução do backend e análise em ambiente isolado. Não confundir este decodificador com um servidor de batalhas.
+
+Também foi acrescentado teste de ponta a ponta do transporte WSS↔TCP usando serviço TCP local de eco no CI, e teste de emissão/resgate de tickets em PostgreSQL 16 temporário. Nenhum desses testes finge que o `Fighting.Server` está online.
