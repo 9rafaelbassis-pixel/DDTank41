@@ -12,7 +12,7 @@ SOURCE=Path("Source Flash/FlashSV1/ui/vietnam/language.txt")
 GENERATED=Path("translation-input/language.txt")
 OUT=Path("render-web/locale/flash-ui-language.ptbr.txt")
 REPORT=Path("render-web/locale/translation-quality.json")
-TOKENS=re.compile(r"(<\\/?(?:font|b|br|p|i|u|span|a|div|strong|em)\\b[^<>]*>|\\{\\d+(?:\\.\\d+)?\\}|\\\\[nr]|%[sd]|&(?:[a-z]{2,8}|#\\d+);)",re.I)
+TOKENS=re.compile(r"(</?(?:font|b|br|p|i|u|span|a|div|strong|em)\b[^<>]*>|\{\d+(?:\.\d+)?\}|\\[nr]|%[sd]|&(?:[a-z]{2,8}|#\d+);)",re.I)
 VIETNAMESE=re.compile(r"[ĂăĐđƠơƯưẮắẰằẲẳẴẵẶặẠạẢảẤấẦầẨẩẪẫẬậẾếỀềỂểỄễỆệỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỨứỪừỬửỮữỰựỲỳỴỵỶỷỸỹ]")
 MANUAL={
  "AlertDialog.Error":"Erro",
