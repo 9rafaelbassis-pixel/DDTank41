@@ -5,6 +5,7 @@ const { Pool } = require("pg");
 const crypto = require("node:crypto");
 const { attachLobbyServer, lobbyHtml } = require("./lobby");
 const { initCatalog, mountCatalog } = require("./catalog");
+const { mountPreview } = require("./client-preview");
 const csrf = require("./csrf");
 
 const app = express();
@@ -72,10 +73,11 @@ app.get("/dashboard",requireUser,(req,res)=>send(res,"Painel",'<section class="p
 app.get("/admin",requireAdmin,async(req,res,next)=>{try{
  const result=await pool.query("SELECT id,email,role,created_at FROM portal_users ORDER BY created_at DESC LIMIT 200");
  const rows=result.rows.map(u=>'<tr><td>'+u.id+'</td><td>'+esc(u.email)+'</td><td>'+esc(u.role)+'</td><td>'+esc(new Date(u.created_at).toLocaleString("pt-BR",{timeZone:"America/Sao_Paulo"}))+'</td></tr>').join("");
- send(res,"Admin",'<section class="panel"><h1>Administração</h1><p><a class="btn" href="/admin/catalog">Catálogo de itens originais</a></p><p>Contas cadastradas no portal (até 200 mais recentes). Não são contas do jogo original.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>E-mail</th><th>Papel</th><th>Cadastro</th></tr></thead><tbody>'+rows+'</tbody></table></div></section>',req.user);
+ send(res,"Admin",'<section class="panel"><h1>Administração</h1><p><a class="btn" href="/admin/catalog">Catálogo de itens originais</a> <a class="btn" href="/admin/client-preview">Testar cliente Flash</a></p><p>Contas cadastradas no portal (até 200 mais recentes). Não são contas do jogo original.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>E-mail</th><th>Papel</th><th>Cadastro</th></tr></thead><tbody>'+rows+'</tbody></table></div></section>',req.user);
 }catch(err){next(err)}});
 app.get("/lobby",requireUser,(req,res)=>send(res,"Salas online",lobbyHtml(),req.user));
 mountCatalog(app,{pool,requireAdmin,send,esc,csrfField});
+mountPreview(app,{requireAdmin,send});
 app.use((err,req,res,next)=>{console.error("Request failed:",err.code||err.name||"error");if(res.headersSent)return next(err);send(res,"Erro",'<section class="panel"><h1>Erro interno</h1><p>Tente novamente.</p></section>',req.user,500)});
 async function bootstrap(){
  if(!process.env.DATABASE_URL)throw Error("DATABASE_URL não configurada");
