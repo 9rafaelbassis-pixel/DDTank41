@@ -34,3 +34,9 @@ Data: 2026-11-13. **Não confundir a fundação técnica com um servidor DDTank 
 - A conta admin do Render é definida pelas variáveis privadas `ADMIN_EMAIL`/`ADMIN_PASSWORD`.
 - PostgreSQL gratuito do Render expira após **30 dias**, não tem backup gerenciado e não deve ser considerado persistente para um servidor público (https://render.com/docs/free).
 - Não confundir o lobby WebSocket com um proxy do protocolo binário do cliente Flash. Ainda é necessário trabalhar autenticação, mensagens e regras de batalha.
+
+## Importação completa em um clique (lotes automáticos)
+
+Foi criado `/admin/catalog` com seletor **Importação completa em um arquivo JSON**. Escolha o JSON consolidado gerado a partir do artifact de backup SQL Server (7638 modelos); o navegador envia lotes de 75 sob sua sessão admin e mostra progresso. A gravação é idempotente: repetir a importação atualiza o catálogo, sem duplicar IDs. Se interrompida, os lotes anteriores permanecem.
+
+O navegador não precisa de arquivo ZIP: extraia os arquivos `catalog-*.json` e combine-os em uma única matriz JSON, ou use o arquivo consolidado disponibilizado junto ao relatório de execução. Nenhuma rotina grava diretamente no inventário de jogadores.
