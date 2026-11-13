@@ -1,0 +1,5 @@
+# Local migration reports and data exports (never commit SQL credentials/player records)
+migration-output/
+**/migration-output/
+.env
+**/.env
