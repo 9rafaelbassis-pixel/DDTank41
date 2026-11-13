@@ -58,10 +58,16 @@ async function exportGoods(pool,database) {
 }
 async function main(){
  if(!process.env.SQL_PASSWORD)throw Error("SQL_PASSWORD env missing");
- const pool=await new sql.ConnectionPool({
-  server:"127.0.0.1",port:1433,user:"sa",password:process.env.SQL_PASSWORD,database:"master",
-  options:{encrypt:false,trustServerCertificate:true},connectionTimeout:20000,requestTimeout:300000,pool:{max:2}
- }).connect();
+ let pool, lastError;
+ for(let attempt=0;attempt<18;attempt++){
+  try {
+   pool=await new sql.ConnectionPool({
+    server:"127.0.0.1",port:1433,user:"sa",password:process.env.SQL_PASSWORD,database:"master",
+    options:{encrypt:false,trustServerCertificate:true},connectionTimeout:10000,requestTimeout:300000,pool:{max:2}
+   }).connect();break;
+  }catch(error){lastError=error;await new Promise(resolve=>setTimeout(resolve,5000))}
+ }
+ if(!pool)throw Error("SQL Server não iniciou no runner: "+String(lastError&&lastError.message).slice(0,150));
  const report={note:"Only schema columns and item templates; no player rows or secrets.",restores:[],exports:[],issues:[]};
  try {
   for(const job of jobs){
