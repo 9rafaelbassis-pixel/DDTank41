@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
-      HF_HOME: ${{ runner.temp }}/hf-cache
+      HF_HOME: /tmp/ddtank-hf-cache
       TOKENIZERS_PARALLELISM: 'false'
       GITHUB_TOKEN: ${{ github.token }}
     steps:
