@@ -6,6 +6,10 @@ on:
     paths:
       - '.github/workflows/launcher-protocol-audit.yml'
       - 'tools/migration/Inspect-Launcher-ABC.py'
+  pull_request:
+    paths:
+      - '.github/workflows/launcher-protocol-audit.yml'
+      - 'tools/migration/Inspect-Launcher-ABC.py'
 permissions:
   contents: read
 jobs:
@@ -26,4 +30,4 @@ jobs:
         with:
           name: ddtank-flash-auth-api-audit
           path: migration-output/flash-client-audit/report.json
-          retention-days: 7
+          retention-days: 1
