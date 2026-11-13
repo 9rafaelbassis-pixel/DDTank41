@@ -38,3 +38,16 @@ npm start
 
 ## Segurança
 O repositório original contém segredos hardcoded em configurações legadas. Não reutilize essas credenciais, troque-as no banco original e retire segredos do histórico se forem ativos. Não exponha SQL Server à internet. Antes de conectar o painel ao jogo, definir API autenticada, controle de acesso e trilha de auditoria.
+
+## Recuperação de acesso administrativo
+
+A conta administradora é criada pelo `ADMIN_EMAIL` e `ADMIN_PASSWORD` do Render, **não** pela tela pública `/register`. O formulário público cria somente contas `player`. `/admin` redireciona para `/login` quando não há sessão; contas `player` recebem 403 ao entrar.
+
+Se esqueceu a senha do admin já existente:
+1. Render > serviço `ddtank-web` > Environment: confirme o `ADMIN_EMAIL` correto.
+2. Atualize `ADMIN_PASSWORD` com **nova senha forte** (12+ caracteres), mantendo-a somente nas variáveis privadas do Render.
+3. Adicione `ADMIN_RESET_PASSWORD_ON_BOOT=true` e salve com redeploy.
+4. Após o deploy, faça login em `/login` com o e-mail e a **nova senha**. Então abra `/admin`.
+5. Volte à Environment e **remova** `ADMIN_RESET_PASSWORD_ON_BOOT` (ou altere para `false`) para evitar redefinições em futuros reinícios.
+
+Essa operação só redefine uma conta que **já possui role `admin`** com o mesmo e-mail, e invalida sessões anteriores. Por segurança, nunca promove uma conta `player` automaticamente. Caso `ADMIN_EMAIL` já pertença a uma conta comum, escolha um endereço de e-mail *ainda não cadastrado* para provisionar uma nova conta admin (ou execute migração administrativa autenticada posteriormente). Não compartilhe senha nem strings de conexão em prints ou commits.

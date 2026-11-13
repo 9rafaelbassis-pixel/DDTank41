@@ -76,9 +76,19 @@ async function bootstrap(){
  await pool.query(`CREATE TABLE IF NOT EXISTS portal_sessions(token_hash TEXT PRIMARY KEY,user_id BIGINT NOT NULL REFERENCES portal_users(id) ON DELETE CASCADE,expires_at TIMESTAMPTZ NOT NULL)`);
  const email=(process.env.ADMIN_EMAIL||"").trim().toLowerCase(),password=process.env.ADMIN_PASSWORD||"";
  if(email && password.length>=12){
-  const r=await pool.query("SELECT 1 FROM portal_users WHERE email=$1",[email]);
-  if(!r.rowCount){await pool.query("INSERT INTO portal_users(email,password_hash,role) VALUES($1,$2,'admin')",[email,await makePassword(password)]);console.log("Initial admin created")}
- } else console.warn("ADMIN_EMAIL/ADMIN_PASSWORD ausentes ou inválidos; administrador não provisionado");
+  const r=await pool.query("SELECT id,role FROM portal_users WHERE email=$1",[email]);
+  if(!r.rowCount){
+   await pool.query("INSERT INTO portal_users(email,password_hash,role) VALUES($1,$2,'admin')",[email,await makePassword(password)]);
+   console.log("Initial admin created");
+  } else if(r.rows[0].role!=="admin"){
+   console.warn("ADMIN_EMAIL ja pertence a uma conta comum. Use um email diferente no Render para criar o administrador.");
+  } else if(process.env.ADMIN_RESET_PASSWORD_ON_BOOT==="true"){
+   // Explicit operator-initiated recovery. Never promote an existing regular account.
+   await pool.query("UPDATE portal_users SET password_hash=$1 WHERE id=$2 AND role='admin'",[await makePassword(password),r.rows[0].id]);
+   await pool.query("DELETE FROM portal_sessions WHERE user_id=$1",[r.rows[0].id]);
+   console.log("Admin password reset successfully; disable ADMIN_RESET_PASSWORD_ON_BOOT after login.");
+  }
+ } else console.warn("ADMIN_EMAIL/ADMIN_PASSWORD ausentes ou invalidos; administrador nao provisionado");
  app.listen(PORT,"0.0.0.0",()=>console.log("DDTank web portal listening on "+PORT));
 }
 bootstrap().catch(e=>{console.error("Startup failed:",e.message);process.exit(1)});
