@@ -11,6 +11,7 @@ const { RELAY_PATHS, rejectLegacyLogin } = require("./flash-compat");
 const { attachLegacyBridge } = require("./legacy-bridge");
 const { initCharacters, mountCharacters } = require("./characters");
 const { initGameTickets,mountGameTickets,mountTicketRedeemer } = require("./game-tickets");
+const { mountReadiness } = require("./game-readiness");
 const csrf = require("./csrf");
 
 const app = express();
@@ -85,11 +86,12 @@ app.get("/dashboard",requireUser,(req,res)=>send(res,"Painel",'<section class="p
 app.get("/admin",requireAdmin,async(req,res,next)=>{try{
  const result=await pool.query("SELECT id,email,role,created_at FROM portal_users ORDER BY created_at DESC LIMIT 200");
  const rows=result.rows.map(u=>'<tr><td>'+u.id+'</td><td>'+esc(u.email)+'</td><td>'+esc(u.role)+'</td><td>'+esc(new Date(u.created_at).toLocaleString("pt-BR",{timeZone:"America/Sao_Paulo"}))+'</td></tr>').join("");
- send(res,"Admin",'<section class="panel"><h1>Administração</h1><p><a class="btn" href="/admin/catalog">Catálogo de itens originais</a> <a class="btn" href="/admin/client-preview">Testar cliente Flash</a> <a class="btn" href="/admin/players">GM de personagens</a></p><p>Contas cadastradas no portal (até 200 mais recentes). Não são contas do jogo original.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>E-mail</th><th>Papel</th><th>Cadastro</th></tr></thead><tbody>'+rows+'</tbody></table></div></section>',req.user);
+ send(res,"Admin",'<section class="panel"><h1>Administração</h1><p><a class="btn" href="/admin/catalog">Catálogo de itens originais</a> <a class="btn" href="/admin/client-preview">Testar cliente Flash</a> <a class="btn" href="/admin/players">GM de personagens</a> <a class="btn" href="/admin/integration">Status do servidor original</a></p><p>Contas cadastradas no portal (até 200 mais recentes). Não são contas do jogo original.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>E-mail</th><th>Papel</th><th>Cadastro</th></tr></thead><tbody>'+rows+'</tbody></table></div></section>',req.user);
 }catch(err){next(err)}});
 app.get("/lobby",requireUser,(req,res)=>send(res,"Salas online",lobbyHtml(),req.user));
 mountCharacters(app,{pool,requireUser,requireAdmin,send,esc,csrfField});
 mountGameTickets(app,{pool,requireUser,send,csrfField,esc});
+mountReadiness(app,{pool,requireAdmin,send,esc});
 mountCatalog(app,{pool,requireAdmin,send,esc,csrfField});
 mountPreview(app,{requireAdmin,send});
 mountOriginalClient(app,{requireUser,send});
