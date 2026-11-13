@@ -13,8 +13,8 @@ SOURCE = Path("Source Flash/FlashSV1/ui/vietnam/language.txt")
 OUTDIR = Path("translation-output/flash-ui")
 # Identifiers, placeholders, markup, and escapes must be preserved EXACTLY.
 TOKENS = re.compile(r"(<[^<>]*>|\{\d+(?:\.\d+)?\}|\\[nr]|%[sd]|&(?:[a-z]{2,8}|#\d+);)")
-WORDS = re.compile(r"[\p{L}]", flags=0) if False else re.compile(r"[A-Za-zÀ-ỹ]", re.UNICODE)
-VI_UNIQUE = re.compile(r"[ĂăĐđƠơƯưẮắẰằẲẳẴẵẶặẠạẢảÃãẤấẦầẨẩẪẫẬậẾếỀềỂểỄễỆệỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỨứỪừỬửỮữỰựỲỳỴỵỶỷỸỹ]")
+WORDS = re.compile(r"[A-Za-zÀ-ỹ]", re.UNICODE)
+VI_UNIQUE = re.compile(r"[ĂăĐđƠơƯưẮắẰằẲẳẴẵẶặẠạẢảẤấẦầẨẩẪẫẬậẾếỀềỂểỄễỆệỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỨứỪừỬửỮữỰựỲỳỴỵỶỷỸỹ]")
 PROTECTED_KEYS = {"Tank.auctionHouse.view.BaseStripView.Font"}
 DEFAULT_NAMES = {"ok":"OK","sure":"OK","close":"Fechar","clear":"Limpar","get":"Receber","modify":"Editar",
  "cancel":"Cancelar","money":"Cupons","gold":"Ouro","yes":"Sim","no":"Não","tips":"Dicas",
@@ -92,7 +92,12 @@ def main():
   if any(token not in label for token in TOKENS.findall(value)):
    raise RuntimeError("Token de formatação foi perdido na chave: "+key)
   if VI_UNIQUE.search(label):
-   label="[Mensagem pendente de revisão]"
+   # Replace ONLY remaining untranslated text spans. Keep tags, variables
+   # and escaped formatting byte-for-byte to preserve original client behavior.
+   label="".join(
+    "[Texto pendente de revisão]" if VI_UNIQUE.search(part) else part
+    for part in TOKENS.split(label)
+   )
    status="pendente_de_revisao"
   if len(label)>2500:
    label="[Mensagem longa pendente de revisão]"
