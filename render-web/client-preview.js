@@ -2,7 +2,10 @@
 // Admin-only Flash compatibility experiment; not a playable game or battle engine.
 // Only explicitly allowlisted SWFs from this user's repository can be fetched.
 const ALLOWED=new Set(["Launcher.swf","Loading.swf","DDT_Loading.swf"]);
+const express=require("express");
+const path=require("node:path");
 function mountPreview(app,{requireAdmin,send}) {
+ app.use("/admin/ruffle",requireAdmin,express.static(path.join(__dirname,"node_modules","@ruffle-rs","ruffle"),{fallthrough:false}));
  app.get("/admin/client-preview",requireAdmin,(req,res)=>{
   const html='<section class="panel"><h1>Cliente Flash original — diagnóstico</h1>'+
    '<p>Teste experimental com Ruffle. Os arquivos abaixo são SWFs originais do seu repositório; não foram convertidos em jogo HTML5. A comunicação de batalha e os recursos externos ainda não estão integrados.</p>'+
@@ -11,7 +14,7 @@ function mountPreview(app,{requireAdmin,send}) {
    '<button type="button" id="play">Carregar no Ruffle</button>'+
    '<p class="warn" id="notice">Usaremos Ruffle somente como diagnóstico, com chamadas externas bloqueadas.</p>'+
    '<div id="flash" style="min-height:430px;background:#03080f;border:1px solid #41618e;border-radius:12px;margin-top:18px"></div>'+
-   '</section><script src="https://unpkg.com/@ruffle-rs/ruffle"></script>'+
+   '</section><script src="/admin/ruffle/ruffle.js"></script>'+
    '<script>(function(){document.getElementById("play").onclick=async function(){'+
      'const notice=document.getElementById("notice"),mount=document.getElementById("flash");mount.replaceChildren();'+
      'try{if(!window.RufflePlayer)throw Error("Ruffle não carregou.");'+
