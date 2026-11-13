@@ -1,0 +1,19 @@
+{
+  "core.crossZone.ViewGoodInfoUnable": "Não é possível visualizar as informações do item entre servidores.",
+  "tank.view.emailII.WritingView.NickName": "Você não pode enviar mensagens para si mesmo.",
+  "tank.view.emailII.LoadSendInfoError": "Não foi possível carregar as informações das mensagens enviadas.",
+  "tank.view.emailII.LoadMailAllInfoError": "Não foi possível carregar todas as mensagens.",
+  "shop.ShopIIBtnPanel.message.free": "Não é possível enviar este presente.",
+  "tank.view.bagII.baglocked.customer": "<Personalizado>",
+  "im.IMLookupItem.CMFriendInfo": "Não é possível remover amigos do ZingMe.",
+  "tank.game.BuffTip279": "Ao atacar, converte {0}% do dano causado em pontos de vida.",
+  "tank.game.BuffTip280": "Ao atacar, converte {0}% do dano causado em pontos de vida.",
+  "tank.game.BuffTip281": "Ao atacar, converte {0}% do dano causado em pontos de vida.",
+  "tank.game.BuffTip282": "Ao atacar, converte {0}% do dano causado em pontos de vida.",
+  "tank.game.BuffTip112": "Ao atacar, reduz em {0}% a raiva do adversário.",
+  "store.StoreIIComposeBG.AllNumStrip": "Taxa de composição: percentual básico, amuletos da sorte e bônus da guilda.",
+  "ddt.quest.collectInfo.validate": "Código de verificação:",
+  "core.petskillTip.balltype0": "Não é possível acumular efeitos POW.",
+  "core.petskillTip.balltype3": "Não é possível acumular efeitos POW.",
+  "ddt.loader.AvatarCollectionUnitDataFail": "Falha ao carregar as informações da imagem."
+}

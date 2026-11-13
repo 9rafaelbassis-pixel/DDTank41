@@ -5,6 +5,7 @@ const path=require("node:path");
 const manifest=require("./legacy-assets-manifest.json");
 const {configuredBridge,flashProxyOptions}=require("./legacy-bridge");
 const {authUrlRewriteRules}=require("./flash-compat");
+const PTBR_MANUAL=require("./locale/manual-ptbr-overrides.json");
 const MAX_FILE_BYTES=8000000;
 const MAX_CACHE_BYTES=24000000;
 const cache=new Map();
@@ -15,6 +16,16 @@ const FILES=manifest.files;
 const BROWSER_PUBLIC_URL="/game-client";
 const PTBR_LOCALE=path.join(__dirname,"locale","flash-ui-language.ptbr.txt");
 function ptBrLocaleActive(){return process.env.DDTANK_FLASH_PTBR!=="false" && fs.existsSync(PTBR_LOCALE)}
+function applyPtBrOverrides(data){
+ const source=Buffer.isBuffer(data)?data.toString("utf8"):String(data);
+ return Buffer.from(source.split("\n").map(line=>{
+  const at=line.indexOf(":");
+  if(at<0)return line;
+  const key=line.slice(0,at).replace(/^\uFEFF/,"");
+  if(!Object.hasOwn(PTBR_MANUAL,key))return line;
+  return line.slice(0,at+1)+PTBR_MANUAL[key]+(line.endsWith("\r")?"\r":"");
+ }).join("\n"),"utf8");
+}
 
 function allowedPath(path) {
   return typeof path==="string" && Object.hasOwn(FILES,path) && !path.includes("\\") && !path.includes("\0")
@@ -145,6 +156,7 @@ function mountOriginalClient(app,{requireUser,send}) {
     legacyAuthEndpointConnected:false,
     translatedLocaleAvailable:fs.existsSync(PTBR_LOCALE),
     translatedLocaleActive:ptBrLocaleActive(),
+    manualPtBrCorrections:Object.keys(PTBR_MANUAL).length,
     authenticatedFlashSession:false,
     combatProtocolPorted:false,
     note:"O endereço antigo localhost/rest-auth/login é interceptado e retorna diagnóstico 503. Ele não autentica, valida senhas ou conecta o servidor C#."
@@ -158,7 +170,7 @@ function mountOriginalClient(app,{requireUser,send}) {
       const type=contentType(filename);
       if(filename==="ui/vietnam/language.txt" && ptBrLocaleActive() && req.query.original!=="1"){
         const contents=fs.readFileSync(PTBR_LOCALE);
-        if(contents.length>0 && contents.length<1000000){buffer=contents;res.set("X-DDTank-Translation","pt-BR-experimental");}
+        if(contents.length>0 && contents.length<1000000){buffer=applyPtBrOverrides(contents);res.set("X-DDTank-Translation","pt-BR-experimental");}
       }else if(filename==="config.xml"){
         const origin=process.env.PUBLIC_ORIGIN||"https://ddtank-web.onrender.com";
         buffer=Buffer.from(safeConfig(buffer.toString("utf8"),origin),"utf8");
@@ -174,4 +186,4 @@ function mountOriginalClient(app,{requireUser,send}) {
     }
   });
 }
-module.exports={mountOriginalClient,allowedPath,gitBlobSha,safeConfig,contentType,clientHtml,ptBrLocaleActive,PTBR_LOCALE};
+module.exports={mountOriginalClient,allowedPath,gitBlobSha,safeConfig,contentType,clientHtml,ptBrLocaleActive,PTBR_LOCALE,applyPtBrOverrides};
