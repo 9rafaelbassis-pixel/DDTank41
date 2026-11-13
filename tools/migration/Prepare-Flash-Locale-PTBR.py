@@ -12,10 +12,11 @@ SOURCE=Path("Source Flash/FlashSV1/ui/vietnam/language.txt")
 GENERATED=Path("translation-input/language.txt")
 OUT=Path("render-web/locale/flash-ui-language.ptbr.txt")
 REPORT=Path("render-web/locale/translation-quality.json")
-TOKENS=re.compile(r"(<[^<>]*>|\{\d+(?:\.\d+)?\}|\\[nr]|%[sd]|&(?:[a-z]{2,8}|#\d+);)")
+TOKENS=re.compile(r"(<\\/?(?:font|b|br|p|i|u|span|a|div|strong|em)\\b[^<>]*>|\\{\\d+(?:\\.\\d+)?\\}|\\\\[nr]|%[sd]|&(?:[a-z]{2,8}|#\\d+);)",re.I)
 VIETNAMESE=re.compile(r"[ĂăĐđƠơƯưẮắẰằẲẳẴẵẶặẠạẢảẤấẦầẨẩẪẫẬậẾếỀềỂểỄễỆệỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỨứỪừỬửỮữỰựỲỳỴỵỶỷỸỹ]")
 MANUAL={
  "AlertDialog.Error":"Erro",
+ "chat.FastReplyDefaultStr":"<Padrão>",
  "AlertDialog.Info":"Informação",
  "Crazytank.ONLY_ONE_CLIENT":"Você só pode abrir uma janela do jogo por vez.",
  "CrazyTank.CLOSE_OTHER_CLIENT":"Fechando outra janela do jogo.",

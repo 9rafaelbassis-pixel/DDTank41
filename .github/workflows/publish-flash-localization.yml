@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/publish-flash-localization.yml'
+      - 'tools/migration/Prepare-Flash-Locale-PTBR.py'
 permissions:
   contents: write
   actions: read
@@ -24,6 +25,8 @@ jobs:
           mkdir -p translation-input
           gh run download 43383931009 -n ddtank-flash-language-ptbr -D translation-input
           test -s translation-input/language.txt
+      - name: Test Flash markup recognition
+        run: python tools/migration/test_prepare_flash_locale.py
       - name: Validate all original keys and typography
         run: |
           python -m py_compile tools/migration/Prepare-Flash-Locale-PTBR.py
