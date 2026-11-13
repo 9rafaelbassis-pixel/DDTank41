@@ -16,6 +16,7 @@
     "pg": "^8.13.3",
     "helmet": "^8.0.0",
     "express-rate-limit": "^7.5.0",
-    "ws": "^8.18.3"
+    "ws": "^8.18.3",
+    "@ruffle-rs/ruffle": "0.7.1"
   }
 }
