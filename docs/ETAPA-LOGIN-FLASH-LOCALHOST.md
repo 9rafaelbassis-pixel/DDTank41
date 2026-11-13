@@ -41,3 +41,17 @@ Após o Render publicar o novo commit como Live:
 - Confirme que a resposta é 503 documentada (não 403 CSP nem acesso à rede local).
 - Em paralelo, `/dashboard`, `/admin`, `/character`, `/inventory` e `/lobby` devem continuar funcionando.
 - Consulte os resultados de **Actions > DDTank Flash launcher API audit (offline)** para decidir a próxima etapa do contrato de autenticação.
+
+## Nova descoberta — SWF original descompactado
+
+O `Launcher.swf` está no formato `ZWS` (LZMA) e contém **1.817 strings ABC** na análise estática, além de chamadas a **três endpoints HTTP locais**:
+
+| API original no cliente | Finalidade aparente | Estado no portal |
+| --- | --- | --- |
+| `/rest-auth/login/` | Autenticação da conta do jogo | Somente diagnóstico HTTP 503 |
+| `/user/api/server-list/` | Descoberta de servidores/canais | Somente diagnóstico HTTP 503 |
+| `/user/api/login2/getlinkflash/` | Obtenção do link Flash após login | Somente diagnóstico HTTP 503 |
+
+Em todos os casos o cliente original aponta para `127.0.0.1:8000`; o Ruffle passa a reescrever os URLs **exatos** (HTTP/HTTPS) para o domínio público, mas nenhuma das três funções é falsamente considerada pronta. Não são proxies abertos e não armazenam senhas. A sequência e o formato JSON dos serviços antigos ainda precisam ser reconstruídos e testados antes do login integrado funcionar.
+
+O relatório do scanner mostra os nomes das APIs, **não** divulga strings arbitrárias adjacentes, chaves antigas ou credenciais encontradas no bytecode. Arquivos `ui/vietnam` continuam com essa nomenclatura física para atender os caminhos exigidos pelo cliente; o conteúdo textual será PT-BR quando validado.
