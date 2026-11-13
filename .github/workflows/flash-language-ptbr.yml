@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/flash-language-ptbr.yml'
+      - 'tools/migration/Translate-Flash-Language-PTBR.py'
 permissions:
   contents: read
 jobs:
