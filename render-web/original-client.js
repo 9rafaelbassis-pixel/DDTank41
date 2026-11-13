@@ -1,6 +1,7 @@
 "use strict";
 const crypto=require("node:crypto");
 const manifest=require("./legacy-assets-manifest.json");
+const {configuredBridge,flashProxyOptions}=require("./legacy-bridge");
 const MAX_FILE_BYTES=8000000;
 const MAX_CACHE_BYTES=24000000;
 const cache=new Map();
@@ -90,7 +91,7 @@ function contentType(path){
  if(path.endsWith(".gif"))return "image/gif";
  return "application/octet-stream";
 }
-function clientHtml(csrfToken) {
+function clientHtml(socketOptions=[]) {
   const list=["Launcher.swf","Loading.swf","DDT_Loading.swf","ui/vietnam/swf/_corei.swf"];
   const choices=list.filter(allowedPath).map(x=>'<option value="'+x+'">'+x+'</option>').join("");
   return '<section class="panel"><h1>DDTank clássico — laboratório Flash</h1>'+
@@ -113,7 +114,7 @@ function clientHtml(csrfToken) {
     'var r=window.RufflePlayer.newest(),player=r.createPlayer();'+
     'player.style.width="100%";player.style.height="520px";screen.appendChild(player);'+
     'await player.ruffle().load({url:"/game-client/files/"+document.getElementById("movie").value,'+
-    'base:location.origin+"/game-client/files/",allowNetworking:"internal",openUrlMode:"deny"});'+
+    'base:location.origin+"/game-client/files/",allowNetworking:"internal",openUrlMode:"deny",socketProxy:'+JSON.stringify(socketOptions)+'});'+
     'status.textContent="SWF carregado pelo Ruffle. Isso não significa conexão com o jogo original; verifique recursos e o console do navegador."'+
     '}catch(e){status.textContent="Falha ao carregar: "+e.message}}'+
     '})();</script>';
@@ -125,12 +126,13 @@ function mountOriginalClient(app,{requireUser,send}) {
   app.use("/game-client/ruffle",requireUser,express.static(path.join(__dirname,"node_modules","@ruffle-rs","ruffle"),{fallthrough:false}));
   app.get("/game-client",requireUser,(req,res)=>{
     res.set("Content-Security-Policy","default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; media-src 'self' blob:; worker-src 'self' blob:; font-src 'self' data:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'");
-    send(res,"Cliente Flash original",clientHtml(),req.user);
+    send(res,"Cliente Flash original",clientHtml(flashProxyOptions()),req.user);
   });
   app.get("/game-client/status",requireUser,(req,res)=>res.json({
     stage:"flash-assets-loader",
     allowedAssets:Object.keys(FILES).length,
     originalServerOnline:false,
+    tcpBridgeConfigured:configuredBridge().enabled,
     authenticatedFlashSession:false,
     combatProtocolPorted:false,
     note:"O portal está online, mas o servidor C# e a autenticação do cliente Flash não foram conectados."
