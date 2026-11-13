@@ -78,3 +78,13 @@ O repositório histórico contém códigos antigos com **credenciais e chaves em
 Foi criado `render-web/legacy-packets.js` para **decodificar apenas o cabeçalho de pacotes não cifrados**, com testes de tamanhos e campos. Não registra payloads, não captura senhas e **não altera os bytes** da ponte WSS↔TCP. Pacotes criptografados ou o handshake completo exigem execução do backend e análise em ambiente isolado. Não confundir este decodificador com um servidor de batalhas.
 
 Também foi acrescentado teste de ponta a ponta do transporte WSS↔TCP usando serviço TCP local de eco no CI, e teste de emissão/resgate de tickets em PostgreSQL 16 temporário. Nenhum desses testes finge que o `Fighting.Server` está online.
+
+## Configuração protegida dos serviços legados
+
+Por segurança, esta entrega deixa **vazios no GitHub** os campos `conString`, `crosszoneString`, `privateKey`, `LoginKey`, `ChargeKey` e `SentRewardKey` nas configurações originais que os continham. Links externos antigos também foram neutralizados em `Tank.Request/Web.config`.
+
+**Isso é intencional:** as aplicações C# podem compilar, porém não devem conseguir se autenticar no banco nem iniciar corretamente até receber novas configurações por uma implantação privada, separada do repositório público. Não recrie esses valores em commits, PRs, logs ou screenshots. Use exclusivamente um gerenciador de segredos, arquivos privados no host e credenciais novas/rotacionadas.
+
+As credenciais publicadas anteriormente **continuam acessíveis no histórico do Git**; a alteração do commit atual não revoga senhas nem APIs de terceiros. Faça a rotação fora do GitHub e avalie a limpeza do histórico com cautela (reescrever histórico pode afetar forks e clones, e não revoga credenciais que já vazaram).
+
+Por isso, **não habilite `-Start` em `Check-Legacy-Runtime.ps1`** antes de configurar SQL Server e os endpoints privados com novos segredos.
