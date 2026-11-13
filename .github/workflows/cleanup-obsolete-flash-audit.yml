@@ -1,0 +1,21 @@
+name: Cleanup obsolete Flash audit artifact
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cleanup-obsolete-flash-audit.yml'
+permissions:
+  contents: read
+  actions: write
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Delete only first unsanitized debugging artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --silent -X DELETE "repos/$GITHUB_REPOSITORY/actions/artifacts/14016984507"
+          echo "Obsolete self-created Flash audit artifact deleted."
