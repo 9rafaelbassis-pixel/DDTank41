@@ -137,6 +137,7 @@ function mountOriginalClient(app,{requireUser,send}) {
     originalServerOnline:false,
     tcpBridgeConfigured:configuredBridge().enabled,
     localhostAuthRewriteActive:true,
+    knownLegacyApiEndpoints:3,
     legacyAuthEndpointConnected:false,
     authenticatedFlashSession:false,
     combatProtocolPorted:false,
