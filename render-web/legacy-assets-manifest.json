@@ -1,0 +1,1002 @@
+{
+  "source": "Source Flash/FlashSV1",
+  "generatedFromCommit": "51bc899494bd6a1ca42ef667f56e9446c211c249",
+  "files": {
+    "1.png": {
+      "sha": "582b09a484355f00f31d83d3400f8de15004a057",
+      "size": 204742
+    },
+    "2.png": {
+      "sha": "badbd907d7cf12d32ac4f64dcd3cc695fbc714e9",
+      "size": 4719218
+    },
+    "3.png": {
+      "sha": "99e0f033a3475172de62d04f01a4825949ac672f",
+      "size": 216624
+    },
+    "audio.swf": {
+      "sha": "8f8a581730e7f1d45aba1dc39c78a106c6f20d9d",
+      "size": 1780811
+    },
+    "characterdefine.xml": {
+      "sha": "b11abfd6fcd1fdc40a985d8d2fd59b44843fb74f",
+      "size": 3688
+    },
+    "config.xml": {
+      "sha": "96fcb99f8a8ec432834e79ed2caaeddcbe55f062",
+      "size": 4169
+    },
+    "crossdomain.xml": {
+      "sha": "0a9b3337fab182b8ba1ff71ecc4816fa3d9f7cf5",
+      "size": 177
+    },
+    "DDT_Loading.swf": {
+      "sha": "edcc38f90de245e985eeebb59c199cf094f1a223",
+      "size": 1037625
+    },
+    "Launcher.swf": {
+      "sha": "1cb6096d2c2a4971e16beb263b5d70aef0655dd8",
+      "size": 1338123
+    },
+    "Loading.swf": {
+      "sha": "d11a9a57b0f820e27f8bec1eb3e116397e6a7463",
+      "size": 188475
+    },
+    "md5.xml": {
+      "sha": "f9f91729d0ab4f2fa25c26df77ff4260161d1e6b",
+      "size": 380
+    },
+    "partical.xml": {
+      "sha": "0bfc07df78cb71d49f12d0bab381d0f1b1fcf568",
+      "size": 663132
+    },
+    "particallite.xml": {
+      "sha": "988c3e5cf7fa1c9c4d6d89f1058b0f47f4d0fff7",
+      "size": 812
+    },
+    "shape.swf": {
+      "sha": "400c50724ab84fd5fe323ab9c036d2af368a1c19",
+      "size": 1262152
+    },
+    "shapelite.swf": {
+      "sha": "9c24811e601d91a7906a4ed090163bffbf05b4f5",
+      "size": 2211
+    },
+    "ui/vietnam/img/active.jpg": {
+      "sha": "84f21a1d10007aec5a052f91b998b42634c1126b",
+      "size": 312896
+    },
+    "ui/vietnam/img/auction.jpg": {
+      "sha": "0223a9e072fcc3236d4596a69f6534f124dc12cd",
+      "size": 75479
+    },
+    "ui/vietnam/img/campaignlab.jpg": {
+      "sha": "f7b4ed57fc1c4f392b74885b2a6028c6cc880d75",
+      "size": 122651
+    },
+    "ui/vietnam/img/church.jpg": {
+      "sha": "f8a887e24c401a8ba4d79b10cdc13da0ea017662",
+      "size": 145570
+    },
+    "ui/vietnam/img/consortia.jpg": {
+      "sha": "8a323919f0d83879472c205a02665ceb7722d6ac",
+      "size": 253651
+    },
+    "ui/vietnam/img/dungeon.jpg": {
+      "sha": "eb9389eb6a2b00281d40df465dd208ab3811371a",
+      "size": 196059
+    },
+    "ui/vietnam/img/hotwell.jpg": {
+      "sha": "2e47ad60addfcb8b1813114f208860c8a23a86b3",
+      "size": 61399
+    },
+    "ui/vietnam/img/roomlist.jpg": {
+      "sha": "8f73258a598115de8e07043e8a77e22696600236",
+      "size": 109709
+    },
+    "ui/vietnam/img/tofflist.jpg": {
+      "sha": "15932170e2f825ee7c06bb744bfa5358beb24f0b",
+      "size": 72390
+    },
+    "ui/vietnam/img/trainer/active.jpg": {
+      "sha": "84f21a1d10007aec5a052f91b998b42634c1126b",
+      "size": 312896
+    },
+    "ui/vietnam/img/trainer/auction.jpg": {
+      "sha": "0223a9e072fcc3236d4596a69f6534f124dc12cd",
+      "size": 75479
+    },
+    "ui/vietnam/img/trainer/campaignlab.jpg": {
+      "sha": "f7b4ed57fc1c4f392b74885b2a6028c6cc880d75",
+      "size": 122651
+    },
+    "ui/vietnam/img/trainer/character/female.png": {
+      "sha": "4744f3ced6ea876d949143e41c75c49bb497b878",
+      "size": 170970
+    },
+    "ui/vietnam/img/trainer/character/male.png": {
+      "sha": "fd449d25ecf1f2b0a8587c1b51fdefa8c722cf59",
+      "size": 145420
+    },
+    "ui/vietnam/img/trainer/church.jpg": {
+      "sha": "f8a887e24c401a8ba4d79b10cdc13da0ea017662",
+      "size": 145570
+    },
+    "ui/vietnam/img/trainer/consortia.jpg": {
+      "sha": "8a323919f0d83879472c205a02665ceb7722d6ac",
+      "size": 253651
+    },
+    "ui/vietnam/img/trainer/dungeon.jpg": {
+      "sha": "eb9389eb6a2b00281d40df465dd208ab3811371a",
+      "size": 196059
+    },
+    "ui/vietnam/img/trainer/hotwell.jpg": {
+      "sha": "2e47ad60addfcb8b1813114f208860c8a23a86b3",
+      "size": 61399
+    },
+    "ui/vietnam/img/trainer/tofflist.jpg": {
+      "sha": "15932170e2f825ee7c06bb744bfa5358beb24f0b",
+      "size": 72390
+    },
+    "ui/vietnam/language.txt": {
+      "sha": "6b9a20e7bfcc5931157120224ebb01718605f334",
+      "size": 260905
+    },
+    "ui/vietnam/levelreward.xml": {
+      "sha": "6f3ce550dd97759153a372f55c905c8b6e072ae3",
+      "size": 5643
+    },
+    "ui/vietnam/movingnotification.txt": {
+      "sha": "52c616aae50b803473340e41d4812fd461147e40",
+      "size": 6028
+    },
+    "ui/vietnam/swf/_corei.swf": {
+      "sha": "e4725bb5ecc3589affa8bb54580fc374f19782ab",
+      "size": 1614450
+    },
+    "ui/vietnam/swf/academy.swf": {
+      "sha": "0238f90709d0c8b23dae1e5ba34fa11a183e338b",
+      "size": 242833
+    },
+    "ui/vietnam/swf/academycommon.swf": {
+      "sha": "9004fe3ade0be9f117d5e346f2634eac51475df9",
+      "size": 529821
+    },
+    "ui/vietnam/swf/activeevents.swf": {
+      "sha": "d64efc87b00bfb0b79da39941d26ea96cbc99736",
+      "size": 44527
+    },
+    "ui/vietnam/swf/auction.swf": {
+      "sha": "ea9a07b5fe5e4030d5bfb42af22f7bc2d9e878f2",
+      "size": 354708
+    },
+    "ui/vietnam/swf/avatarcollection.swf": {
+      "sha": "03d8f6a251228eef29edb530288c95458346de10",
+      "size": 104154
+    },
+    "ui/vietnam/swf/avatarcollection1.swf": {
+      "sha": "6f7e07f2d342a8eb3c0c98a6de58c93fc08c4b02",
+      "size": 91091
+    },
+    "ui/vietnam/swf/awardsystem.swf": {
+      "sha": "57c6c1105f079c17b0cb6f21b836bf1048ee1a9b",
+      "size": 1609013
+    },
+    "ui/vietnam/swf/awardsystem1.swf": {
+      "sha": "c2dab3e7f8a6d8949b25b0115245ac20ed367ee5",
+      "size": 1435239
+    },
+    "ui/vietnam/swf/bagandinfo.swf": {
+      "sha": "a642568b91acb3d4778fa22c2e0ea971f16b3490",
+      "size": 1101396
+    },
+    "ui/vietnam/swf/bagandinfo1.swf": {
+      "sha": "d524162ba2c74deb452868c40ecbcc8965917f76",
+      "size": 1054835
+    },
+    "ui/vietnam/swf/bagandinfo2.swf": {
+      "sha": "4f3b44e841c4acf51cfd22d627b3e3a01f3a078a",
+      "size": 1073233
+    },
+    "ui/vietnam/swf/baglocked.swf": {
+      "sha": "1f818c96a6f68956f6eeba6179689da7e577eff0",
+      "size": 164750
+    },
+    "ui/vietnam/swf/bank.swf": {
+      "sha": "8582683670934b1aeb42eef82e0f4cda19177ab9",
+      "size": 28634
+    },
+    "ui/vietnam/swf/caddy.swf": {
+      "sha": "53e5c9d425f25a9a3ccfd07a1c5f5047380020bc",
+      "size": 879819
+    },
+    "ui/vietnam/swf/calendar.swf": {
+      "sha": "2cd1ded65fd2ca51bf8ee7d90f84d84eae561b92",
+      "size": 127098
+    },
+    "ui/vietnam/swf/cardsystem.swf": {
+      "sha": "1aad94c06b72b73c7d1c721ea654d806224f9f1d",
+      "size": 373661
+    },
+    "ui/vietnam/swf/challengeroom.swf": {
+      "sha": "2c00b35dd619d0d3212e811afb038baef5e403d2",
+      "size": 62796
+    },
+    "ui/vietnam/swf/changecolor.swf": {
+      "sha": "0dabcc3a79450acf25a108148e893b3f996f8420",
+      "size": 19382
+    },
+    "ui/vietnam/swf/chat.swf": {
+      "sha": "198e598f3ec548160c03a81739487e57abd25c43",
+      "size": 511206
+    },
+    "ui/vietnam/swf/chat1.swf": {
+      "sha": "02791135f1c4b7927d83e162df6d8541a862f682",
+      "size": 510732
+    },
+    "ui/vietnam/swf/chatball.swf": {
+      "sha": "5562bd21a26d8366f23625286281a15b8add91e9",
+      "size": 2360152
+    },
+    "ui/vietnam/swf/chickactivation.swf": {
+      "sha": "e3bf66d544b89e0e3728e0bc08f7d634f72765fa",
+      "size": 97553
+    },
+    "ui/vietnam/swf/choicefigure.swf": {
+      "sha": "7b864b3e4bd232e0a6d219a196ff02ab6eb56458",
+      "size": 282917
+    },
+    "ui/vietnam/swf/churchroom.swf": {
+      "sha": "9e0c9d8743c90a7a379995655556d7f1e10fcf24",
+      "size": 498036
+    },
+    "ui/vietnam/swf/churchroomlist.swf": {
+      "sha": "ae9dbba0acda5ff21e76978ca0050b14b67b1560",
+      "size": 223212
+    },
+    "ui/vietnam/swf/civil.swf": {
+      "sha": "1a481253a9341bae20572eb1f3ebc2a67226556d",
+      "size": 102303
+    },
+    "ui/vietnam/swf/consortia.swf": {
+      "sha": "1a255a36893ce67e0e55c14cb73bf7a495b8c50f",
+      "size": 199307
+    },
+    "ui/vietnam/swf/consortiabattle.swf": {
+      "sha": "b5a91ba02d4bc7664d094b7e40fb2fe11d4f416e",
+      "size": 140218
+    },
+    "ui/vietnam/swf/consortion.swf": {
+      "sha": "07b39c3d1e1a977d0459db9358b61313def4c273",
+      "size": 388743
+    },
+    "ui/vietnam/swf/consortionclub.swf": {
+      "sha": "0063d69928ca99cbf70b766c6beecc348708b810",
+      "size": 135824
+    },
+    "ui/vietnam/swf/consortionii.swf": {
+      "sha": "9a30b0b90f34c0052c1ad2a17cca317a3a798850",
+      "size": 615953
+    },
+    "ui/vietnam/swf/core.swf": {
+      "sha": "e80d0e574cbbe2052dfb178a70fa4645e8cea3cc",
+      "size": 716075
+    },
+    "ui/vietnam/swf/corei.swf": {
+      "sha": "c39cdb136c3ee5dceca67c9b08da8bb7538c5c54",
+      "size": 1632403
+    },
+    "ui/vietnam/swf/coreiconandtip.swf": {
+      "sha": "a6553df28b115d2d0b0b7fcb477a6c4f72c73d24",
+      "size": 373114
+    },
+    "ui/vietnam/swf/coreiconandtip1.swf": {
+      "sha": "f389f95a91c82fc4a57650079678e7c0a9f4a58d",
+      "size": 373326
+    },
+    "ui/vietnam/swf/coreii.swf": {
+      "sha": "6a26a52b4d46cb1440e66ae8ddd23bfbdca41649",
+      "size": 1241721
+    },
+    "ui/vietnam/swf/corescalebitmap.swf": {
+      "sha": "448085daab580c907e79b5095b37819cf777416e",
+      "size": 294689
+    },
+    "ui/vietnam/swf/cursor.swf": {
+      "sha": "29f453e78ac67327f708ba1954a4e5092e678e52",
+      "size": 22631
+    },
+    "ui/vietnam/swf/ddtcorescalebitmap.swf": {
+      "sha": "40939ede06d3cc807075811decf62e94a5c98a59",
+      "size": 189301
+    },
+    "ui/vietnam/swf/ddthallicon.swf": {
+      "sha": "4cfdf8ec6380071d709fd5f5f37b5a038e628b22",
+      "size": 923566
+    },
+    "ui/vietnam/swf/ddtstore.swf": {
+      "sha": "3f3c06e372098923827e3d7f193800b90c29b50a",
+      "size": 733103
+    },
+    "ui/vietnam/swf/effort.swf": {
+      "sha": "25a1d98e4fa59ac3931fccb85fd54e32d8ab4f17",
+      "size": 115487
+    },
+    "ui/vietnam/swf/elitegame.swf": {
+      "sha": "ef887b5a849615d2b6ec3f10296608c070da0b9b",
+      "size": 321768
+    },
+    "ui/vietnam/swf/email.swf": {
+      "sha": "198243f732d05260b9ea9c42fadbabfd645a8feb",
+      "size": 277291
+    },
+    "ui/vietnam/swf/enthrall.swf": {
+      "sha": "b4bb4841fabccc15b63d0aa7eb56eb36f8bcfa1c",
+      "size": 95710
+    },
+    "ui/vietnam/swf/expression.swf": {
+      "sha": "d905cd1861e63fa965b30ddd5a34a5e97afc14fd",
+      "size": 159956
+    },
+    "ui/vietnam/swf/farm.swf": {
+      "sha": "9d40c1abfd8a798778d45dda2e0c59c1737d10ab",
+      "size": 945870
+    },
+    "ui/vietnam/swf/farmpettrainerui.swf": {
+      "sha": "210b7314e0a29c8439cad37546d9392838b70f9e",
+      "size": 223626
+    },
+    "ui/vietnam/swf/feedback.swf": {
+      "sha": "c3c4dbd7a22c3412e7d92a08dd40d5007e035817",
+      "size": 26401
+    },
+    "ui/vietnam/swf/fightlib.swf": {
+      "sha": "1116f13a20637c4854f925748210624141c9ccd0",
+      "size": 389314
+    },
+    "ui/vietnam/swf/firstrecharge.swf": {
+      "sha": "de100184acd43e7087741ddc574899b61c1689fc",
+      "size": 137678
+    },
+    "ui/vietnam/swf/firsttainer.swf": {
+      "sha": "51650d34dc65162c820e87a4db4b68adae883e4f",
+      "size": 1523776
+    },
+    "ui/vietnam/swf/forgemain.swf": {
+      "sha": "bbdca64b5e47280c29b0d50ef47be44ce83be0e4",
+      "size": 222046
+    },
+    "ui/vietnam/swf/forgemain1.swf": {
+      "sha": "3dd0750d1bb71c3d95329d8af600e649050477d5",
+      "size": 214382
+    },
+    "ui/vietnam/swf/game.swf": {
+      "sha": "60b0ae72b5655b7469f72ae9927fe7e911697cf3",
+      "size": 1881769
+    },
+    "ui/vietnam/swf/gameii.swf": {
+      "sha": "07566506b9953ff1b4791bc63df6eb2414594f76",
+      "size": 1283189
+    },
+    "ui/vietnam/swf/gameover.swf": {
+      "sha": "d852e2003aea3a0f29f4cf0a472c8d655fe4435f",
+      "size": 667437
+    },
+    "ui/vietnam/swf/gemstone.swf": {
+      "sha": "3ca2b67da71dc64fc7bff952d63f860388b0419e",
+      "size": 381845
+    },
+    "ui/vietnam/swf/giftsystem.swf": {
+      "sha": "a985b6e8de0323a8e7e48456f70821968225201a",
+      "size": 133861
+    },
+    "ui/vietnam/swf/gotopage.swf": {
+      "sha": "3864b27ec820091d0cfb3fff794e028130508c0d",
+      "size": 189462
+    },
+    "ui/vietnam/swf/guildmemberweek.swf": {
+      "sha": "eb6d9b9b1eeafdfd4657b27e4dee9381e73ebeb4",
+      "size": 206278
+    },
+    "ui/vietnam/swf/hall_old.swf": {
+      "sha": "e5891b6f83634c69ff20d627e8b1e8eb2b1de961",
+      "size": 2299516
+    },
+    "ui/vietnam/swf/hall.swf": {
+      "sha": "1904f13361ae3047fbb2df3536115e5984a44fd1",
+      "size": 2301059
+    },
+    "ui/vietnam/swf/hotspringroom.swf": {
+      "sha": "353cf08b5bd1713b90879403c0430325415a1a57",
+      "size": 2272644
+    },
+    "ui/vietnam/swf/hotspringroomlist.swf": {
+      "sha": "b7211f57524f4826920532a1a69bd5084bea05a3",
+      "size": 778315
+    },
+    "ui/vietnam/swf/im.swf": {
+      "sha": "e8f139784fc57f6c6761e7d63050b8bfa770b59c",
+      "size": 85220
+    },
+    "ui/vietnam/swf/invite.swf": {
+      "sha": "bb16bb0bb17f5e38dfbd430cc064fac5d745a914",
+      "size": 37846
+    },
+    "ui/vietnam/swf/labyrinth.swf": {
+      "sha": "f6f80c82969fe7e78cf0e51cb0623375a22fbebd",
+      "size": 157639
+    },
+    "ui/vietnam/swf/latentenergy.swf": {
+      "sha": "cffc748ebf09fb392b8c06d42dd12dcb48806c7c",
+      "size": 39673
+    },
+    "ui/vietnam/swf/league.swf": {
+      "sha": "ba758700a8a67a6c769b861a208501f10f749384",
+      "size": 60650
+    },
+    "ui/vietnam/swf/levelicon.swf": {
+      "sha": "365ff3f07f297a6a416db82e40ff57b982f8a30b",
+      "size": 136687
+    },
+    "ui/vietnam/swf/littlegame.swf": {
+      "sha": "2d45be583c5e482c9eb90da7c613b329548508f5",
+      "size": 137093
+    },
+    "ui/vietnam/swf/login.swf": {
+      "sha": "866e5b5ec5d181c10017627a3030c9166aef4630",
+      "size": 23943
+    },
+    "ui/vietnam/swf/luckstar.swf": {
+      "sha": "bdc8961659b40139b333b4cc641d5b61af40131c",
+      "size": 163329
+    },
+    "ui/vietnam/swf/luckstaraction.swf": {
+      "sha": "db78057226d25017ee6b263e909cf459589d0bc8",
+      "size": 371446
+    },
+    "ui/vietnam/swf/newchickenbox.swf": {
+      "sha": "3ee08ac7bc5400339f3b0c7c4e558ad599f5cb66",
+      "size": 434576
+    },
+    "ui/vietnam/swf/newchickenbox1.swf": {
+      "sha": "5208158333ddb4bb10b72d1b3b73007b33de2721",
+      "size": 1405558
+    },
+    "ui/vietnam/swf/newtitle.swf": {
+      "sha": "48f664bfd7629d3ba1effaa161faff22bdd43543",
+      "size": 15993
+    },
+    "ui/vietnam/swf/noviceactivity.swf": {
+      "sha": "acbe71b7b9c3a625d9fda6c84632213b53ea803c",
+      "size": 148549
+    },
+    "ui/vietnam/swf/oldTrainer.swf": {
+      "sha": "271dc46472a2b81f352ff23dd5b308a768e42c7f",
+      "size": 210067
+    },
+    "ui/vietnam/swf/oldTutorialstepassets.swf": {
+      "sha": "477a95a4e9936c2c13a1291c04d6914c5dcd2eaa",
+      "size": 182029
+    },
+    "ui/vietnam/swf/petsbag.swf": {
+      "sha": "0e03838a4baf36fbf0c92bdb73a6ac62148b7f2f",
+      "size": 2356234
+    },
+    "ui/vietnam/swf/playertip.swf": {
+      "sha": "ca5cc85bc8eefd01eb10c939bfafd85dd0254b45",
+      "size": 23926
+    },
+    "ui/vietnam/swf/quest.swf": {
+      "sha": "7544c2af9bb59c9a286d661fd79bee07b51389ec",
+      "size": 315477
+    },
+    "ui/vietnam/swf/roadcomponent.swf": {
+      "sha": "7185475197116c0e789908d898401a8b0dd44ac6",
+      "size": 148912
+    },
+    "ui/vietnam/swf/room.swf": {
+      "sha": "6093353815cd170487f6b2aaddffeaf3c6dcbc2b",
+      "size": 2146820
+    },
+    "ui/vietnam/swf/roomlist.swf": {
+      "sha": "f2c09082d64fb014fa4e267a7bc8d599fbfe0224",
+      "size": 330625
+    },
+    "ui/vietnam/swf/roulette.swf": {
+      "sha": "9fc3f29306300018f3489000d2c0210363de0af5",
+      "size": 219581
+    },
+    "ui/vietnam/swf/roulette1.swf": {
+      "sha": "c50a0ae72ac51cb7af4557ae026df956a8995a80",
+      "size": 940978
+    },
+    "ui/vietnam/swf/serverList.swf": {
+      "sha": "81706e1b2116b46dbe55de7ff36af60f87c7942a",
+      "size": 58610
+    },
+    "ui/vietnam/swf/setting.swf": {
+      "sha": "08578ccad7193157d9e3cb8f0a96b8336e91b0c9",
+      "size": 48646
+    },
+    "ui/vietnam/swf/shop.swf": {
+      "sha": "ebc3b3987021436c104b083d4b0fb2bded43df43",
+      "size": 266684
+    },
+    "ui/vietnam/swf/store.swf": {
+      "sha": "74be2803a93a3ffefc89a75a3ed56416cd47ab6b",
+      "size": 1536535
+    },
+    "ui/vietnam/swf/storefinebringup.swf": {
+      "sha": "77753df61efb1169b58a9bc118fb22aca09cf318",
+      "size": 140557
+    },
+    "ui/vietnam/swf/task.swf": {
+      "sha": "ec9908484e7203b990953d78bdaacb667b6df6b3",
+      "size": 6035
+    },
+    "ui/vietnam/swf/texpsystem.swf": {
+      "sha": "b641e42ab7efdf38ad505e85de7fef0e2c36d49a",
+      "size": 240185
+    },
+    "ui/vietnam/swf/times.swf": {
+      "sha": "535d54e826a4d501a24d98b7a5392558a628f453",
+      "size": 546707
+    },
+    "ui/vietnam/swf/toffilist.swf": {
+      "sha": "9374c3a415f49431ab609956cafec6d8e1c48edf",
+      "size": 409049
+    },
+    "ui/vietnam/swf/toolbar.swf": {
+      "sha": "0af51dba74c191ad199ef1d5557fb2c84e782d9a",
+      "size": 40041
+    },
+    "ui/vietnam/swf/totem.swf": {
+      "sha": "7e6f82019645cf8c7c338a2c67bf3329f92d9c31",
+      "size": 401409
+    },
+    "ui/vietnam/swf/trainer.swf": {
+      "sha": "2733cccee124ee5b8de1fd7c504bd3fdc9257bfe",
+      "size": 415599
+    },
+    "ui/vietnam/swf/trainer1.swf": {
+      "sha": "264050c9396f24d6731d4d0d84b09d45c10092c4",
+      "size": 142887
+    },
+    "ui/vietnam/swf/trainer2.swf": {
+      "sha": "a36af36435f8bddcaf15bfdf184f82ac66e5d5e2",
+      "size": 72395
+    },
+    "ui/vietnam/swf/trainer3.swf": {
+      "sha": "e443e860f0d0229e1868ecc9641e945dbcafb0ad",
+      "size": 39679
+    },
+    "ui/vietnam/swf/trainer4.swf": {
+      "sha": "b20d830215c242388dbb8bdd1078fb4862a67fd2",
+      "size": 28661
+    },
+    "ui/vietnam/swf/trainer5.swf": {
+      "sha": "7f1f627bdd723a95280fa270bb00dc9ce013b773",
+      "size": 90977
+    },
+    "ui/vietnam/swf/trainer6.swf": {
+      "sha": "79bee625c26b25d37da05e0aaa684c0bffc9ca8f",
+      "size": 73722
+    },
+    "ui/vietnam/swf/trainerui.swf": {
+      "sha": "33e795f5db35012a78b62444ced3f09bd493ac10",
+      "size": 641582
+    },
+    "ui/vietnam/swf/tutorialstepassets.swf": {
+      "sha": "e928f76a78862584da49391ccac47bc686bdcfc0",
+      "size": 181822
+    },
+    "ui/vietnam/swf/vipview.swf": {
+      "sha": "818b90e5dbfb5d322708b09813e09f1cdee75a25",
+      "size": 598013
+    },
+    "ui/vietnam/swf/weekly.swf": {
+      "sha": "0db0e842476464529bdf422894654ea63d893770",
+      "size": 156725
+    },
+    "ui/vietnam/swf/wonderfulactivity.swf": {
+      "sha": "5bc3c15cbdac8fd0021b07df4e53ef8cd5e51620",
+      "size": 1425730
+    },
+    "ui/vietnam/swf/worldboss.swf": {
+      "sha": "8b9ee63e5d1c334ad542034310e35f53f39b231c",
+      "size": 113035
+    },
+    "ui/vietnam/xml/academy.xml": {
+      "sha": "5b8ba21c9aa55bf1a36875cf989e03792e3841fd",
+      "size": 14120
+    },
+    "ui/vietnam/xml/academyCommon.xml": {
+      "sha": "d44eb7a4f1d0afd26cfb96d8b5bc76201fcd1fd5",
+      "size": 35942
+    },
+    "ui/vietnam/xml/activeEvents.xml": {
+      "sha": "cc7a5df84b9dbef120a194cfe813e0be9b51c9ec",
+      "size": 7412
+    },
+    "ui/vietnam/xml/auction.xml": {
+      "sha": "1061d306db2d114206a7a3108c819bf50df71293",
+      "size": 29812
+    },
+    "ui/vietnam/xml/avatarcollection.xml": {
+      "sha": "0fcc0bee06ba99d7744f68d00e7f9fe953b8f46c",
+      "size": 12127
+    },
+    "ui/vietnam/xml/awardSystem.xml": {
+      "sha": "a61e6842fcc9e9c76ec4b9ca4bbbe4d7fe26d949",
+      "size": 56742
+    },
+    "ui/vietnam/xml/bagAndInfo.xml": {
+      "sha": "a4b4674a17f3085dd34a7fb09a5e764b7c862791",
+      "size": 62404
+    },
+    "ui/vietnam/xml/bagLocked.xml": {
+      "sha": "79b2eadf2df47d553cc9c20f5ba1ca2d77c167d7",
+      "size": 19626
+    },
+    "ui/vietnam/xml/bank.xml": {
+      "sha": "190d224603c42fe2337df25f2c98a6bb50ebf0ca",
+      "size": 3867
+    },
+    "ui/vietnam/xml/caddy.xml": {
+      "sha": "b3f9f4b6f00394cc5f5ee741ce85328a49750cb7",
+      "size": 137
+    },
+    "ui/vietnam/xml/calendar.xml": {
+      "sha": "7be779dbe3e0718280f8fc37d6262e26e43e3f33",
+      "size": 21765
+    },
+    "ui/vietnam/xml/cardSystem.xml": {
+      "sha": "363140d1b4b76eea71a5a72f3fe73c645ef17847",
+      "size": 23096
+    },
+    "ui/vietnam/xml/challengeRoom.xml": {
+      "sha": "79ee62d825a8e79dde75debd84efe16f7ab3f9dc",
+      "size": 4904
+    },
+    "ui/vietnam/xml/changeColor.xml": {
+      "sha": "af16ebe8cedc209370e1fe618b43f175d0c3a58f",
+      "size": 4343
+    },
+    "ui/vietnam/xml/chat.xml": {
+      "sha": "18adf771d5028641cad00226cd2ec02d88b0fa37",
+      "size": 24822
+    },
+    "ui/vietnam/xml/chatBall.xml": {
+      "sha": "7178972c5019adef1fb6642b8de972196345de19",
+      "size": 146
+    },
+    "ui/vietnam/xml/chickActivation.xml": {
+      "sha": "469149be2ce89abe4b3c85ce221f151900cd6923",
+      "size": 9428
+    },
+    "ui/vietnam/xml/choicefigure.xml": {
+      "sha": "d31914ba06e9313fe9077b544d94eea7f7790d60",
+      "size": 5523
+    },
+    "ui/vietnam/xml/churchRoom.xml": {
+      "sha": "2bd6dba009142cfe7b20c0527aa3e7461e6b55fe",
+      "size": 39753
+    },
+    "ui/vietnam/xml/churchRoomList.xml": {
+      "sha": "fa0ee25f47c0b5e305ead1f43b34820738dedd95",
+      "size": 16482
+    },
+    "ui/vietnam/xml/Civil.xml": {
+      "sha": "3d78cb725e35b48f87fc4c7af8887f662ca618ab",
+      "size": 12799
+    },
+    "ui/vietnam/xml/consortiabattle.xml": {
+      "sha": "4d9ef5aab81a6967f69c2c317eac25627117b88c",
+      "size": 13015
+    },
+    "ui/vietnam/xml/consortion.xml": {
+      "sha": "95b47f7a029cc97726d9ca2d777dc34ec1abc3eb",
+      "size": 31278
+    },
+    "ui/vietnam/xml/consortionClub.xml": {
+      "sha": "b20c4067900bd3c240828a79571f60defe17a96a",
+      "size": 8559
+    },
+    "ui/vietnam/xml/consortionII.xml": {
+      "sha": "213983b37b704732d380f95dc69a4fff320f7d16",
+      "size": 47344
+    },
+    "ui/vietnam/xml/coreI.xml": {
+      "sha": "e4f8761c5e240bbe32e563b3ce1c5f426e925a8e",
+      "size": 166129
+    },
+    "ui/vietnam/xml/coreIconAndTip.xml": {
+      "sha": "81b4595598eb5fc6820a3385565c089cf0f62309",
+      "size": 6036
+    },
+    "ui/vietnam/xml/coreII.xml": {
+      "sha": "52f16a55b85c460b3f7cfdaa80683f00c2b43d29",
+      "size": 5332
+    },
+    "ui/vietnam/xml/coreScaleBitmap.xml": {
+      "sha": "ab1a0cc18c43a1b9e8836e1ff7d271a30b68158e",
+      "size": 7166
+    },
+    "ui/vietnam/xml/cursor.xml": {
+      "sha": "90a98ce69085b46fe6a39a2a6d4f47e8d457f684",
+      "size": 267
+    },
+    "ui/vietnam/xml/ddtcorescalebitmap.xml": {
+      "sha": "be48a69433ba1687f4f1b381d658b2090a3754d1",
+      "size": 15445
+    },
+    "ui/vietnam/xml/ddthallIcon.xml": {
+      "sha": "9615ca35363f43767c893ba7514006f5dea9fec8",
+      "size": 3913
+    },
+    "ui/vietnam/xml/Effort.xml": {
+      "sha": "f94eca68ad098b58850a60eb15f76102adff0b7e",
+      "size": 20373
+    },
+    "ui/vietnam/xml/EliteGame.xml": {
+      "sha": "7aafd618dabb2b83bd9c0b97eaff40e015f49e84",
+      "size": 17720
+    },
+    "ui/vietnam/xml/email.xml": {
+      "sha": "12e7bf2b6c0798670cae93a170077cb28ba10b18",
+      "size": 17396
+    },
+    "ui/vietnam/xml/enthrall.xml": {
+      "sha": "8b26f6d4c85944fbddb33099d8faf049322bf9de",
+      "size": 4461
+    },
+    "ui/vietnam/xml/farm.xml": {
+      "sha": "0a84eebedb7b7f9bfca35b0e6b6a82aa8c71b8ea",
+      "size": 95643
+    },
+    "ui/vietnam/xml/farmPetTrainerUI.xml": {
+      "sha": "cb38668fa1f0ee384a09b2effa7f3291c2d8308d",
+      "size": 6822
+    },
+    "ui/vietnam/xml/feedback.xml": {
+      "sha": "0c8e90dddf08dd1c503750e8ab545487e3f94cd0",
+      "size": 21024
+    },
+    "ui/vietnam/xml/fightLib.xml": {
+      "sha": "56f6cb118da5e5335c8b95e91dcc9a4f550532ad",
+      "size": 14384
+    },
+    "ui/vietnam/xml/firstrecharge.xml": {
+      "sha": "34f4c432e274140337bf364e585e940a5dbf195c",
+      "size": 2954
+    },
+    "ui/vietnam/xml/forgemain.xml": {
+      "sha": "5a63c387ddad4a9888ab56518abb5051820510d2",
+      "size": 2293
+    },
+    "ui/vietnam/xml/game.xml": {
+      "sha": "b74f767f8e3f4e394d613c434448db3214458c01",
+      "size": 52283
+    },
+    "ui/vietnam/xml/gameII.xml": {
+      "sha": "52f85cbc28dfc4a9188449eef5ccba3e37fd1d6e",
+      "size": 1108
+    },
+    "ui/vietnam/xml/gameiii.xml": {
+      "sha": "1592d7cdff8a4f4712fdc7f4f4db901244aa20b6",
+      "size": 3142
+    },
+    "ui/vietnam/xml/gameOver.xml": {
+      "sha": "7cf6aa0377293699eba7422eace77342990db724",
+      "size": 28133
+    },
+    "ui/vietnam/xml/gemstone.xml": {
+      "sha": "507a59f06df2fc2a1107e93ddbdc77d175275198",
+      "size": 20495
+    },
+    "ui/vietnam/xml/giftSystem.xml": {
+      "sha": "80110beda4bec7a898d782c0a4dbafc0cbab6f88",
+      "size": 20184
+    },
+    "ui/vietnam/xml/gotoPage.xml": {
+      "sha": "ecd97f12a4638e5ba0de0aa062859b2370a570fb",
+      "size": 11975
+    },
+    "ui/vietnam/xml/guildmemberweek.xml": {
+      "sha": "b38cd1923f40939ee5fb458731a3d6630f3bb664",
+      "size": 21947
+    },
+    "ui/vietnam/xml/hall.xml": {
+      "sha": "52070b3033d25c4813472d07c9815430c059c441",
+      "size": 5056
+    },
+    "ui/vietnam/xml/hotSpringRoom.xml": {
+      "sha": "6bdaf67b5963663c833010e8b338df0428874ed7",
+      "size": 6290
+    },
+    "ui/vietnam/xml/hotSpringRoomList.xml": {
+      "sha": "edc68ef09d46d8b74a6839a73a9af8be3f4652a4",
+      "size": 5297
+    },
+    "ui/vietnam/xml/IM.xml": {
+      "sha": "d7e2a4fc32c0d2fa058305262bfa08d9dacaedc9",
+      "size": 30817
+    },
+    "ui/vietnam/xml/invite.xml": {
+      "sha": "892096cee04f355121102392c996e3a52df4e4c3",
+      "size": 4297
+    },
+    "ui/vietnam/xml/inviteFriends.xml": {
+      "sha": "acbc70ae1f2ea30025fefb63bafb6da81efa0821",
+      "size": 6024
+    },
+    "ui/vietnam/xml/labyrinth.xml": {
+      "sha": "a5371068af4f2874f7d2e1e9ba874e385c101945",
+      "size": 29586
+    },
+    "ui/vietnam/xml/latentenergy.xml": {
+      "sha": "b4774270f027610fb184383ba22755fa9663eecb",
+      "size": 5314
+    },
+    "ui/vietnam/xml/league.xml": {
+      "sha": "93bf7ded784ccbbcf92d7234fb2a4dd758f260e5",
+      "size": 4357
+    },
+    "ui/vietnam/xml/LevelIcon.xml": {
+      "sha": "89023b5f200bf3dbe268c7c2386eabad8d2b66e4",
+      "size": 721
+    },
+    "ui/vietnam/xml/littleGame.xml": {
+      "sha": "0482eb02bca2a18afc579bb5132cfa4a4f0e50a9",
+      "size": 9189
+    },
+    "ui/vietnam/xml/loading.xml": {
+      "sha": "d3ea717bbbad7eedc039abfacb4b4a2197a82b55",
+      "size": 162
+    },
+    "ui/vietnam/xml/login.xml": {
+      "sha": "e8a26c88c074069c15331148d4e302d86760e758",
+      "size": 5108
+    },
+    "ui/vietnam/xml/lottery.xml": {
+      "sha": "f7d1a94520f4a258c34cdd7df4010ba053165e32",
+      "size": 9165
+    },
+    "ui/vietnam/xml/luckstar.xml": {
+      "sha": "cb2e40bb50da5cdec5ab3229dd4e2c57cc5dad9f",
+      "size": 17116
+    },
+    "ui/vietnam/xml/newchickenbox.xml": {
+      "sha": "deabd90c3b992335b8d5f6afacc78be10a896b5b",
+      "size": 11248
+    },
+    "ui/vietnam/xml/newTitle.xml": {
+      "sha": "d31d77db53daec8bd445e25877182d6eac5ff658",
+      "size": 7408
+    },
+    "ui/vietnam/xml/noviceactivity.xml": {
+      "sha": "186fc9c763d683ce9282f84ce5b9b01d2d1400dd",
+      "size": 5966
+    },
+    "ui/vietnam/xml/petsBag.xml": {
+      "sha": "622dadf51a9f2f8d52b85e71d8db44edc3ec82fe",
+      "size": 49922
+    },
+    "ui/vietnam/xml/playerTip.xml": {
+      "sha": "d41ec297bbeff11c3034c9070bd6a433dc004652",
+      "size": 9429
+    },
+    "ui/vietnam/xml/quest.xml": {
+      "sha": "2b49d96577ebc9b4e93fcc0f8fa2884f5fe0892b",
+      "size": 21891
+    },
+    "ui/vietnam/xml/roadComponent.xml": {
+      "sha": "b2f4d2e64c6990c7ebe11957c6f3b81eace9916e",
+      "size": 30558
+    },
+    "ui/vietnam/xml/room.xml": {
+      "sha": "3cde3e427ec7dc6e46fba5ff600059d9c7ad7fd3",
+      "size": 45721
+    },
+    "ui/vietnam/xml/RoomList.xml": {
+      "sha": "502bb75aa10ecac3f4f5d0a9c3e026799b4f44e2",
+      "size": 25917
+    },
+    "ui/vietnam/xml/roulette.xml": {
+      "sha": "cf718ca6e2e3f4e3397e718af6fdea19376267a9",
+      "size": 6850
+    },
+    "ui/vietnam/xml/setting.xml": {
+      "sha": "b717b9e437c4e5a9e963d336825b9c3049de0808",
+      "size": 5794
+    },
+    "ui/vietnam/xml/shop.xml": {
+      "sha": "6597365f67ae7a77c61f77be5ad6f9c6f5b8066d",
+      "size": 35012
+    },
+    "ui/vietnam/xml/store.xml": {
+      "sha": "d80b8ebe8055fb7feb4fd40b6b7d56fda89489fa",
+      "size": 75816
+    },
+    "ui/vietnam/xml/storeFineBringUp.xml": {
+      "sha": "799422a5f0c36de61146bdb079e378cef2d621ce",
+      "size": 5667
+    },
+    "ui/vietnam/xml/task.xml": {
+      "sha": "a358954eda4abc9dd88d838fbe62753d8981610e",
+      "size": 629
+    },
+    "ui/vietnam/xml/texpSystem.xml": {
+      "sha": "454bd0402cec53d0326e19fa8f0fad57551fb514",
+      "size": 12353
+    },
+    "ui/vietnam/xml/times.xml": {
+      "sha": "a9da5c401c22ef0c3cdf47846ac7832fafb570c4",
+      "size": 9381
+    },
+    "ui/vietnam/xml/Toffilist.xml": {
+      "sha": "9c421eda646941bf53a9029708a15facea4407ab",
+      "size": 26106
+    },
+    "ui/vietnam/xml/ToolBar.xml": {
+      "sha": "56b5d2a2ebb96f4fe8e3687257fdaea1bcc5b7e4",
+      "size": 4156
+    },
+    "ui/vietnam/xml/totem.xml": {
+      "sha": "00debc87e54bb3258dd38daafb416b3bfba0da7a",
+      "size": 26342
+    },
+    "ui/vietnam/xml/trainer.xml": {
+      "sha": "aba823bb575b1b1a7855a73af94095e7eaae20d3",
+      "size": 4382
+    },
+    "ui/vietnam/xml/trainer1.xml": {
+      "sha": "43de4bfb07cd540593c1651b95fe861395e757a0",
+      "size": 1640
+    },
+    "ui/vietnam/xml/trainer2.xml": {
+      "sha": "c101897eb8d8c9989f9943f9a72d970008434e88",
+      "size": 659
+    },
+    "ui/vietnam/xml/trainer3.xml": {
+      "sha": "620e811d6b2380ea2381e9ba13675a29d9617df7",
+      "size": 599
+    },
+    "ui/vietnam/xml/trainer4.xml": {
+      "sha": "c325bb3f38754239a0089a40b68eca786defd1be",
+      "size": 656
+    },
+    "ui/vietnam/xml/trainer5.xml": {
+      "sha": "8e66f78284670ba681128be2493d91fadff63be4",
+      "size": 579
+    },
+    "ui/vietnam/xml/trainer6.xml": {
+      "sha": "699d29e66e7efb15a4151593aef6f099654b0a8f",
+      "size": 1579
+    },
+    "ui/vietnam/xml/trainerUI.xml": {
+      "sha": "47a34ab809eea914fb4921423c8b597fdffe0157",
+      "size": 10384
+    },
+    "ui/vietnam/xml/vipView.xml": {
+      "sha": "0696f7545eeb01552b38702a09df500c2f16b5e5",
+      "size": 19716
+    },
+    "ui/vietnam/xml/wonderfulactivity.xml": {
+      "sha": "3ce0e947e4b116ce4f98461a9fa08dc058552a00",
+      "size": 47780
+    },
+    "ui/vietnam/xml/worldBoss.xml": {
+      "sha": "0b36b7aabcd79ae96587971bbc70eac18dc72f65",
+      "size": 22399
+    },
+    "ui/vietnam/xml/xml.png": {
+      "sha": "c24deb1556a8645dfbfe88edc927d8a35ab78a99",
+      "size": 288442
+    },
+    "ui/vietnam/zhancode.txt": {
+      "sha": "d7e06fd66ec9c55f11bf3cf0803c702b06f0b56e",
+      "size": 20831
+    }
+  }
+}
