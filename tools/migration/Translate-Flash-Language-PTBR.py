@@ -47,6 +47,9 @@ def lines_with_keys(source):
    result.append((original,key,value))
  return result
 def eligible(segment):
+ # re.split() retains captured markup and placeholders: never send those tokens
+ # to machine translation, even when they contain Latin letters like <font>.
+ if TOKENS.fullmatch(segment):return False
  return bool(WORDS.search(segment)) and len(segment.strip())>=2 and "://" not in segment
 def sanitize(value):
  value=" ".join(value.strip().split())
@@ -83,14 +86,14 @@ def main():
      labelpart=suggestions.get(part,"")
      # This is NOT a fake translation: flag a visible generic label if the model
      # failed to produce usable PT-BR. Do not expose Vietnamese-only glyphs.
-     if not labelpart or VI_UNIQUE.search(labelpart) or (labelpart==part and VI_UNIQUE.search(part)):
+     if not labelpart or TOKENS.search(labelpart) or VI_UNIQUE.search(labelpart) or (labelpart==part and VI_UNIQUE.search(part)):
       labelpart="[Texto pendente de revisão]"
       forced=True
      result.append(labelpart)
     else: result.append(part)
    label="".join(result);status="pendente_de_revisao" if forced else "traducao_automatica_revisar"
-  if any(token not in label for token in TOKENS.findall(value)):
-   raise RuntimeError("Token de formatação foi perdido na chave: "+key)
+  if TOKENS.findall(value)!=TOKENS.findall(label):
+   raise RuntimeError("Marcadores de formatação alterados na chave: "+key)
   if VI_UNIQUE.search(label):
    # Replace ONLY remaining untranslated text spans. Keep tags, variables
    # and escaped formatting byte-for-byte to preserve original client behavior.

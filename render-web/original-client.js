@@ -2,6 +2,7 @@
 const crypto=require("node:crypto");
 const manifest=require("./legacy-assets-manifest.json");
 const {configuredBridge,flashProxyOptions}=require("./legacy-bridge");
+const {authUrlRewriteRules}=require("./flash-compat");
 const MAX_FILE_BYTES=8000000;
 const MAX_CACHE_BYTES=24000000;
 const cache=new Map();
@@ -91,12 +92,12 @@ function contentType(path){
  if(path.endsWith(".gif"))return "image/gif";
  return "application/octet-stream";
 }
-function clientHtml(socketOptions=[]) {
+function clientHtml(socketOptions=[],rewriteRules=authUrlRewriteRules(process.env.PUBLIC_ORIGIN||"https://ddtank-web.onrender.com")) {
   const list=["Launcher.swf","Loading.swf","DDT_Loading.swf","ui/vietnam/swf/_corei.swf"];
   const choices=list.filter(allowedPath).map(x=>'<option value="'+x+'">'+x+'</option>').join("");
   return '<section class="panel"><h1>DDTank clássico — laboratório Flash</h1>'+
     '<p>Reproduz os arquivos SWF existentes na sua base usando Ruffle e recursos originais. O <strong>servidor do jogo, autenticação Flash, mapa e combate originais ainda não estão conectados</strong>.</p>'+
-    '<p><a class="btn" href="/character">Meu personagem</a> <a class="btn" href="/inventory">Inventário do portal</a> <a class="btn" href="/lobby">Salas de teste</a></p>'+
+    '<p class="warn" style="border:1px solid #af8640;border-radius:9px;padding:12px"><strong>Login do Flash em manutenção:</strong> a janela antiga ainda não autentica sua conta. NÃO digite senhas nos campos desenhados pelo jogo. Use o acesso já existente ao portal. O endereço antigo 127.0.0.1 é bloqueado e redirecionado apenas a um diagnóstico seguro.</p><p><small>Traduções da tela: Tài khoản = Conta; Mật khẩu = Senha; CHƠI NGAY = JOGAR AGORA.</small></p><p><a class="btn" href="/character">Meu personagem</a> <a class="btn" href="/inventory">Inventário do portal</a> <a class="btn" href="/lobby">Salas de teste</a></p>'+
     '<p class="chip" id="stage">249 recursos originais autorizados • carregador de teste</p>'+
     '<label>Arquivo inicial<select id="movie" style="display:block;margin:10px 0;padding:12px;background:#08142a;border:1px solid #41618e;border-radius:8px;color:white;max-width:100%">'+choices+'</select></label>'+
     '<button type="button" id="startFlash">Abrir o cliente original</button> '+
@@ -114,7 +115,7 @@ function clientHtml(socketOptions=[]) {
     'var r=window.RufflePlayer.newest(),player=r.createPlayer();'+
     'player.style.width="100%";player.style.height="520px";screen.appendChild(player);'+
     'await player.ruffle().load({url:"/game-client/files/"+document.getElementById("movie").value,'+
-    'base:location.origin+"/game-client/files/",allowNetworking:"internal",openUrlMode:"deny",socketProxy:'+JSON.stringify(socketOptions)+'});'+
+    'base:location.origin+"/game-client/files/",allowNetworking:"internal",openUrlMode:"deny",socketProxy:'+JSON.stringify(socketOptions)+',urlRewriteRules:'+JSON.stringify(rewriteRules)+'});'+
     'status.textContent="SWF carregado pelo Ruffle. Isso não significa conexão com o jogo original; verifique recursos e o console do navegador."'+
     '}catch(e){status.textContent="Falha ao carregar: "+e.message}}'+
     '})();</script>';
@@ -135,9 +136,11 @@ function mountOriginalClient(app,{requireUser,send}) {
     allowedAssets:Object.keys(FILES).length,
     originalServerOnline:false,
     tcpBridgeConfigured:configuredBridge().enabled,
+    localhostAuthRewriteActive:true,
+    legacyAuthEndpointConnected:false,
     authenticatedFlashSession:false,
     combatProtocolPorted:false,
-    note:"O portal está online, mas o servidor C# e a autenticação do cliente Flash não foram conectados."
+    note:"O endereço antigo localhost/rest-auth/login é interceptado e retorna diagnóstico 503. Ele não autentica, valida senhas ou conecta o servidor C#."
   }));
   app.get("/game-client/files/*",requireUser,async(req,res)=>{
     // Exact manifest match prevents path traversal and arbitrary GitHub downloads.

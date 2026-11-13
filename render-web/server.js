@@ -7,6 +7,7 @@ const { attachLobbyServer, lobbyHtml } = require("./lobby");
 const { initCatalog, mountCatalog } = require("./catalog");
 const { mountPreview } = require("./client-preview");
 const { mountOriginalClient } = require("./original-client");
+const { RELAY_PATH, rejectLegacyLogin } = require("./flash-compat");
 const { attachLegacyBridge } = require("./legacy-bridge");
 const { initCharacters, mountCharacters } = require("./characters");
 const csrf = require("./csrf");
@@ -15,6 +16,10 @@ const app = express();
 app.disable("x-powered-by");
 app.set("trust proxy", 1);
 app.use(helmet({ contentSecurityPolicy: false }));
+// A no-op compatibility endpoint with NO user state changes or credential handling.
+// It runs before body parsers/CSRF so the legacy SWF cannot submit credentials
+// to our account system or accidentally trigger form authentication.
+app.all(RELAY_PATH, rateLimit({windowMs:60*1000,limit:45,standardHeaders:"draft-7",legacyHeaders:false}), rejectLegacyLogin);
 app.use(express.urlencoded({ extended: false, limit: "120kb" }));
 app.use(express.json({ limit: "10kb" }));
 app.use(csrf);
