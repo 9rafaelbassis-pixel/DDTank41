@@ -64,3 +64,13 @@ test("enabled socket bridge yields syntactically valid Ruffle socketProxy config
  assert.match(script,/wss:\/\/ddtank-web\.onrender\.com\/game-client\/socket/);
  assert.doesNotMatch(script,/ddtank-game\.internal/);
 });
+
+test("Ruffle redirects legacy localhost auth without opening external origins",()=>{
+ const html=clientHtml();
+ const script=html.split("<script>")[1].split("</script>")[0];
+ assert.doesNotThrow(()=>new Function(script));
+ assert.match(script,/urlRewriteRules:/);
+ assert.match(script,/127\\.0\\.0\\.1:8000\\/rest-auth\\/login/);
+ assert.match(script,/ddtank-web\\.onrender\\.com\\/game-client\\/compat\\/rest-auth\\/login/);
+ assert.match(html,/NÃO digite senhas/);
+});
