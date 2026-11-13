@@ -47,3 +47,20 @@ test("Ruffle client HTML embeds syntactically valid JavaScript and no external s
  assert.doesNotThrow(()=>new Function(inline));
  assert.doesNotMatch(html,/https:\/\/unpkg\.com|<script src="https?:/);
 });
+
+test("enabled socket bridge yields syntactically valid Ruffle socketProxy config",()=>{
+ const {flashProxyOptions}=require("../legacy-bridge");
+ const html=clientHtml(flashProxyOptions({
+  DDTANK_TCP_BRIDGE_ENABLED:"true",
+  DDTANK_FLASH_SOCKET_HOST:"127.0.0.1",
+  DDTANK_FLASH_SOCKET_PORT:"9500",
+  DDTANK_TCP_HOST:"ddtank-game.internal",
+  DDTANK_TCP_PORT:"9500",
+  PUBLIC_ORIGIN:"https://ddtank-web.onrender.com"
+ }));
+ const script=html.split("<script>")[1].split("</script>")[0];
+ assert.doesNotThrow(()=>new Function(script));
+ assert.match(script,/socketProxy:\[/);
+ assert.match(script,/wss:\/\/ddtank-web\.onrender\.com\/game-client\/socket/);
+ assert.doesNotMatch(script,/ddtank-game\.internal/);
+});
