@@ -157,4 +157,4 @@ function mountOriginalClient(app,{requireUser,send}) {
     }
   });
 }
-module.exports={mountOriginalClient,allowedPath,gitBlobSha,safeConfig,contentType};
+module.exports={mountOriginalClient,allowedPath,gitBlobSha,safeConfig,contentType,clientHtml};
