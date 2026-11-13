@@ -1,0 +1,40 @@
+name: Publish PT-BR Flash language candidate to review branch
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-flash-localization.yml'
+permissions:
+  contents: write
+  actions: read
+jobs:
+  localize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download successful machine-translated Flash language
+        run: |
+          mkdir -p translation-input
+          gh run download 43383931009 -n ddtank-flash-language-ptbr -D translation-input
+          test -s translation-input/language.txt
+      - name: Validate all original keys and typography
+        run: |
+          python -m py_compile tools/migration/Prepare-Flash-Locale-PTBR.py
+          python tools/migration/Prepare-Flash-Locale-PTBR.py
+      - name: Commit translated asset into new review branch
+        run: |
+          git config user.name "DDTank Build Automation"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c generated/flash-locale-ptbr
+          git add render-web/locale/flash-ui-language.ptbr.txt render-web/locale/translation-quality.json
+          git commit -m "Add reviewable Brazilian Portuguese Flash UI candidate"
+          git push origin HEAD:refs/heads/generated/flash-locale-ptbr
+      - name: Display review path
+        run: echo 'Review generated/flash-locale-ptbr and open PR before merging. Never overwrite original language.txt.'
