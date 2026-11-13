@@ -58,7 +58,8 @@ namespace Tank.Request
                 string nickname = strList[3];
                 //if (PlayerManager.Login(name, pwd))
                 //if (PlayerManager.Login(name, pwd/*.ToUpper()*/)/* || ValidDate == "1"*/)
-                if(true)
+                // Sem bypass de autenticacao: exige login temporario validado pelo PlayerManager.
+                if (PlayerManager.Login(name, pwd))
                 {
                     //if (true)
                     //{
