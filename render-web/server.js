@@ -42,7 +42,32 @@ app.use(async (req,res,next)=>{
 const throttler=rateLimit({windowMs:15*60*1000,limit:30,standardHeaders:"draft-7",legacyHeaders:false});
 function requireUser(req,res,next){if(!req.user)return res.redirect("/login");next()}
 function requireAdmin(req,res,next){if(!req.user)return res.redirect("/login");if(req.user.role!=="admin")return send(res,"Acesso negado",'<section class="panel"><h1>Acesso negado</h1></section>',req.user,403);next()}
-function sameOrigin(req,res,next){const origin=req.get("origin"); if(origin){try {const target=new URL(origin);if(target.host!==req.get("host") || target.protocol!=="https:" && process.env.NODE_ENV==="production") return res.status(403).send("Origem inválida");}catch{return res.status(403).send("Origem inválida")}}next()}
+// Render terminates TLS at a reverse proxy. The incoming Host can differ from
+// the browser-facing hostname, so validate against an explicit public origin.
+function sameOrigin(req, res, next) {
+  const configured = process.env.PUBLIC_ORIGIN || "https://ddtank-web.onrender.com";
+  let expected;
+  try {
+    expected = new URL(configured);
+    if (expected.protocol !== "https:" && process.env.NODE_ENV === "production") {
+      throw new Error("PUBLIC_ORIGIN precisa utilizar HTTPS em produção");
+    }
+  } catch (err) {
+    return next(new Error("PUBLIC_ORIGIN inválida no ambiente"));
+  }
+  // Modern browsers send Origin for a same-site form POST. Referer supports
+  // older browsers; neither is trusted if it points off-site.
+  const source = req.get("origin") || req.get("referer");
+  if (!source) return res.status(403).send("Origem não informada. Abra o site diretamente e tente novamente.");
+  try {
+    if (new URL(source).origin !== expected.origin) {
+      return res.status(403).send("Origem inválida. Abra " + expected.origin + "/login diretamente.");
+    }
+  } catch {
+    return res.status(403).send("Origem inválida.");
+  }
+  next();
+}
 app.use((req,res,next)=> req.method==="POST" ? sameOrigin(req,res,next):next());
 app.get("/health",async(req,res)=>{try{await pool.query("SELECT 1");res.json({status:"ok",database:"connected",gameServer:"not-integrated"})}catch{res.status(503).json({status:"unavailable"})}});
 app.get("/", (req,res)=>send(res,"Início",'<section class="panel"><span class="chip">Projeto DDTank41 • Fase 1</span><h1>Seu novo portal DDTank</h1><p>Cadastro, autenticação e gerenciamento inicial de usuários do portal. O servidor clássico, batalhas, moedas e itens ainda não estão conectados.</p><a class="btn" href="'+(req.user?'/dashboard':'/register')+'">Acessar portal</a></section><div class="grid"><section class="panel"><h2>👤 Contas</h2><p>Cadastre e gerencie usuários do portal.</p></section><section class="panel"><h2>🛡️ Administração</h2><p>Visualize contas com acesso restrito.</p></section><section class="panel"><h2>🎮 Multiplayer</h2><p class="warn">Aguardando migração do servidor legado.</p></section></div>',req.user));
