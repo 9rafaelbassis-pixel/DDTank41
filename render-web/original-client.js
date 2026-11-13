@@ -1,5 +1,7 @@
 "use strict";
 const crypto=require("node:crypto");
+const fs=require("node:fs");
+const path=require("node:path");
 const manifest=require("./legacy-assets-manifest.json");
 const {configuredBridge,flashProxyOptions}=require("./legacy-bridge");
 const {authUrlRewriteRules}=require("./flash-compat");
@@ -11,6 +13,8 @@ let cacheBytes=0;
 const BASE="/game-client/files/";
 const FILES=manifest.files;
 const BROWSER_PUBLIC_URL="/game-client";
+const PTBR_LOCALE=path.join(__dirname,"locale","flash-ui-language.ptbr.txt");
+function ptBrLocaleActive(){return process.env.DDTANK_FLASH_PTBR!=="false" && fs.existsSync(PTBR_LOCALE)}
 
 function allowedPath(path) {
   return typeof path==="string" && Object.hasOwn(FILES,path) && !path.includes("\\") && !path.includes("\0")
@@ -98,7 +102,7 @@ function clientHtml(socketOptions=[],rewriteRules=authUrlRewriteRules(process.en
   return '<section class="panel"><h1>DDTank clássico — laboratório Flash</h1>'+
     '<p>Reproduz os arquivos SWF existentes na sua base usando Ruffle e recursos originais. O <strong>servidor do jogo, autenticação Flash, mapa e combate originais ainda não estão conectados</strong>.</p>'+
     '<p class="warn" style="border:1px solid #af8640;border-radius:9px;padding:12px"><strong>Login do Flash em manutenção:</strong> a janela antiga ainda não autentica sua conta. NÃO digite senhas nos campos desenhados pelo jogo. Use o acesso já existente ao portal. O endereço antigo 127.0.0.1 é bloqueado e redirecionado apenas a um diagnóstico seguro.</p><p><small>Traduções da tela: Tài khoản = Conta; Mật khẩu = Senha; CHƠI NGAY = JOGAR AGORA.</small></p><p><a class="btn" href="/character">Meu personagem</a> <a class="btn" href="/inventory">Inventário do portal</a> <a class="btn" href="/lobby">Salas de teste</a></p>'+
-    '<p class="chip" id="stage">249 recursos originais autorizados • carregador de teste</p>'+
+    '<p class="chip" id="stage">249 recursos originais autorizados • carregador de teste</p><p class="muted">Idioma do cliente: PT-BR experimental quando instalado; arquivo vietnamita original preservado para recuperação.</p>'+
     '<label>Arquivo inicial<select id="movie" style="display:block;margin:10px 0;padding:12px;background:#08142a;border:1px solid #41618e;border-radius:8px;color:white;max-width:100%">'+choices+'</select></label>'+
     '<button type="button" id="startFlash">Abrir o cliente original</button> '+
     '<button type="button" class="outline" id="checkAssets">Conferir arquivos</button>'+
@@ -139,6 +143,8 @@ function mountOriginalClient(app,{requireUser,send}) {
     localhostAuthRewriteActive:true,
     knownLegacyApiEndpoints:3,
     legacyAuthEndpointConnected:false,
+    translatedLocaleAvailable:fs.existsSync(PTBR_LOCALE),
+    translatedLocaleActive:ptBrLocaleActive(),
     authenticatedFlashSession:false,
     combatProtocolPorted:false,
     note:"O endereço antigo localhost/rest-auth/login é interceptado e retorna diagnóstico 503. Ele não autentica, valida senhas ou conecta o servidor C#."
@@ -150,7 +156,10 @@ function mountOriginalClient(app,{requireUser,send}) {
     try{
       let buffer=await getAsset(filename);
       const type=contentType(filename);
-      if(filename==="config.xml"){
+      if(filename==="ui/vietnam/language.txt" && ptBrLocaleActive() && req.query.original!=="1"){
+        const contents=fs.readFileSync(PTBR_LOCALE);
+        if(contents.length>0 && contents.length<1000000){buffer=contents;res.set("X-DDTank-Translation","pt-BR-experimental");}
+      }else if(filename==="config.xml"){
         const origin=process.env.PUBLIC_ORIGIN||"https://ddtank-web.onrender.com";
         buffer=Buffer.from(safeConfig(buffer.toString("utf8"),origin),"utf8");
       }else if(filename==="crossdomain.xml"){
