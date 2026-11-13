@@ -1,0 +1,47 @@
+name: DDTank - Testar tickets de jogo em PostgreSQL real
+on:
+  pull_request:
+    paths:
+      - 'render-web/game-tickets.js'
+      - 'render-web/integration/auth-tickets.cjs'
+      - '.github/workflows/game-auth-postgres.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'render-web/game-tickets.js'
+      - 'render-web/integration/auth-tickets.cjs'
+      - '.github/workflows/game-auth-postgres.yml'
+permissions:
+  contents: read
+jobs:
+  auth-postgresql:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: game_auth_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres_ci_only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d game_auth_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres:postgres_ci_only@127.0.0.1:5432/game_auth_test
+      NODE_ENV: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependências do portal
+        working-directory: render-web
+        run: npm install --omit=dev
+      - name: Testar emissão, resgate único e expiração
+        working-directory: render-web
+        run: node integration/auth-tickets.cjs

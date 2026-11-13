@@ -33,13 +33,21 @@ namespace Tank.Request
         public static bool ValidLoginIP(string ip)
         {
             string ips = GetLoginIP;
-            if (string.IsNullOrEmpty(ips) || ips.Split('|').Contains(ip))
+            if (!string.IsNullOrWhiteSpace(ips) && ips.Split('|').Contains(ip))
                 return true;
             return false;
         } 
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Rejeita requisicoes externas: CreateLogin alimenta um login temporario.
+            // Quando o IIS legado for hospedado, configure LoginIP com os hosts confiaveis.
+            if (!ValidLoginIP(Context.Request.UserHostAddress))
+            {
+                Response.StatusCode = 403;
+                Response.Write(3);
+                return;
+            }
             int result = 1;
             try
             {

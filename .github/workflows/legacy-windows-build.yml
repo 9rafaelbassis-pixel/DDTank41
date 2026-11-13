@@ -1,0 +1,26 @@
+name: DDTank - Validar servidor legado Windows
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/legacy-windows-build.yml'
+      - 'tools/legacy/Test-Legacy-Build.ps1'
+  pull_request:
+    paths:
+      - '.github/workflows/legacy-windows-build.yml'
+      - 'tools/legacy/Test-Legacy-Build.ps1'
+permissions:
+  contents: read
+jobs:
+  build-legacy:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Locate MSBuild
+        uses: microsoft/setup-msbuild@v2
+      - name: Compile original Center, Fighting and Road C# services
+        shell: pwsh
+        run: ./tools/legacy/Test-Legacy-Build.ps1

@@ -1,0 +1,31 @@
+const test=require("node:test");
+const assert=require("node:assert/strict");
+const {MAGIC,HEADER_LENGTH,parseHeader,expectedChecksum}=require("../legacy-packets");
+test("reads original C# 20-byte packet framing without touching payload",()=>{
+ const frame=Buffer.alloc(HEADER_LENGTH);
+ frame.writeUInt16BE(MAGIC,0);
+ frame.writeUInt16BE(HEADER_LENGTH,2);
+ frame.writeInt16BE(7,6);
+ frame.writeInt32BE(51,8);
+ frame.writeInt32BE(-2,12);
+ frame.writeInt32BE(99,16);
+ const checksum=expectedChecksum(frame);
+ frame.writeUInt16BE(checksum,4);
+ const result=parseHeader(frame);
+ assert.equal(result.declaredLength,20);
+ assert.equal(result.frameComplete,true);
+ assert.equal(result.packetCode,7);
+ assert.equal(result.clientId,51);
+ assert.equal(result.parameter1,-2);
+ assert.equal(result.parameter2,99);
+ assert.equal(result.checksum,checksum);
+});
+test("rejects invalid magic, short length, oversized packet and partial frames",()=>{
+ assert.equal(parseHeader(Buffer.alloc(10)),null);
+ const bad=Buffer.alloc(20);bad.writeUInt16BE(MAGIC,0);
+ bad.writeUInt16BE(19,2);assert.equal(parseHeader(bad),null);
+ bad.writeUInt16BE(8193,2);assert.equal(parseHeader(bad),null);
+ bad.writeUInt16BE(25,2);
+ assert.equal(parseHeader(bad).frameComplete,false);
+ assert.equal(expectedChecksum(bad),null);
+});
