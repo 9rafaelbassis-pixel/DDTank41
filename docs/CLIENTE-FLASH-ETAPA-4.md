@@ -46,3 +46,21 @@ Foi criada a Action `DDTank Flash language PT-BR`, para gerar `language.txt` pre
 Referências de tecnologia:
 - https://ruffle.rs/js-docs/master/interfaces/Config.SocketProxy.html
 - https://render.com/docs/websocket
+
+## Ponte opcional WS ↔ TCP (código implementado, desativado)
+
+A rota `/game-client/socket` agora contém um **relay binário** que entrega bytes de Ruffle WebSocket a um destino TCP fixado pelo operador. A ponte valida sessão do portal, origem do navegador, tamanho de mensagens e limite de conexões. Não permite que o usuário escolha destinos TCP arbitrários.
+
+Por padrão, a ponte está **desativada**. Ativá-la exige **um servidor original compatível já executando** e configurado em ambiente apropriado. Ela não cria o `Game.Server`, não converte a física e não autentica o protocolo legado.
+
+Configuração necessária no ambiente do serviço, **somente depois de existir servidor confiável**:
+- `DDTANK_TCP_BRIDGE_ENABLED=true` (padrão implícito `false`)
+- `DDTANK_TCP_HOST=ddtank-game.internal` — host privado confiável, acessível pelo serviço Render (exemplo, não é um host existente)
+- `DDTANK_TCP_PORT=9500` — porta real do `Game.Server`
+- `DDTANK_FLASH_SOCKET_HOST=127.0.0.1` — **host requisitado pelo próprio SWF**, precisa ser verificado antes de usar
+- `DDTANK_FLASH_SOCKET_PORT=9500` — porta requisitada pelo SWF
+- `PUBLIC_ORIGIN=https://ddtank-web.onrender.com`
+
+O Ruffle só recebe `socketProxy=[{host,port,proxyUrl}]` se **todas as variáveis forem válidas** e a chave de habilitação estiver ligada. Do contrário, não tenta encaminhar conexões externas. O relay só manipula bytes, não conhece contas, itens, pacotes de batalha nem o conteúdo da aplicação.
+
+**Não habilite a ponte apontando para IPs desconhecidos encontrados no código antigo.** O host `ddtank-game.internal` acima é apenas ilustrativo. O Render hospeda WebSockets públicos na mesma porta do serviço HTTP e não publica portas TCP arbitrárias para o navegador. Fonte: https://render.com/docs/websocket .

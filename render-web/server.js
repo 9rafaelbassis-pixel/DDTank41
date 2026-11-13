@@ -7,6 +7,7 @@ const { attachLobbyServer, lobbyHtml } = require("./lobby");
 const { initCatalog, mountCatalog } = require("./catalog");
 const { mountPreview } = require("./client-preview");
 const { mountOriginalClient } = require("./original-client");
+const { attachLegacyBridge } = require("./legacy-bridge");
 const { initCharacters, mountCharacters } = require("./characters");
 const csrf = require("./csrf");
 
@@ -106,5 +107,6 @@ async function bootstrap(){
  } else console.warn("ADMIN_EMAIL/ADMIN_PASSWORD ausentes ou invalidos; administrador nao provisionado");
  const server=app.listen(PORT,"0.0.0.0",()=>console.log("DDTank web portal listening on "+PORT));
  attachLobbyServer(server,pool);
+ attachLegacyBridge(server,pool);
 }
 bootstrap().catch(e=>{console.error("Startup failed:",e.message);process.exit(1)});
