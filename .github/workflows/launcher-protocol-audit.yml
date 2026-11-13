@@ -1,0 +1,29 @@
+name: DDTank Flash launcher API audit (offline)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/launcher-protocol-audit.yml'
+      - 'tools/migration/Inspect-Launcher-ABC.py'
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Inspect SWF ActionScript constant strings
+        run: |
+          python -m py_compile tools/migration/Inspect-Launcher-ABC.py
+          python tools/migration/Inspect-Launcher-ABC.py
+      - name: Publish sanitized endpoint inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: ddtank-flash-auth-api-audit
+          path: migration-output/flash-client-audit/report.json
+          retention-days: 7
