@@ -125,7 +125,9 @@ function mountOriginalClient(app,{requireUser,send}) {
   const path=require("node:path");
   app.use("/game-client/ruffle",requireUser,express.static(path.join(__dirname,"node_modules","@ruffle-rs","ruffle"),{fallthrough:false}));
   app.get("/game-client",requireUser,(req,res)=>{
-    res.set("Content-Security-Policy","default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; media-src 'self' blob:; worker-src 'self' blob:; font-src 'self' data:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'");
+    const websocketOrigin=new URL(process.env.PUBLIC_ORIGIN||"https://ddtank-web.onrender.com");
+    const wsOrigin=websocketOrigin.protocol==="https:"?"wss://"+websocketOrigin.host:"ws://"+websocketOrigin.host;
+    res.set("Content-Security-Policy","default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' "+wsOrigin+"; media-src 'self' blob:; worker-src 'self' blob:; font-src 'self' data:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'");
     send(res,"Cliente Flash original",clientHtml(flashProxyOptions()),req.user);
   });
   app.get("/game-client/status",requireUser,(req,res)=>res.json({
